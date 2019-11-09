@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CoreCodedChatbot.Config" Version="1.0.296" />
+    <PackageReference Include="CoreCodedChatbot.Secrets" Version="1.0.317" />
+  </ItemGroup>
+
+</Project>

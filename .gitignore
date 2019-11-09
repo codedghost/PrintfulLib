@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/CoreCodedChatbot.Printful/.vs/CoreCodedChatbot.Printful/v16/Server/sqlite3
+/CoreCodedChatbot.Printful/.vs/CoreCodedChatbot.Printful/v16
+/CoreCodedChatbot.Printful/CoreCodedChatbot.Printful/bin/Debug/netcoreapp3.0
+/CoreCodedChatbot.Printful/CoreCodedChatbot.Printful/obj
+/CoreCodedChatbot.Printful/CoreCodedChatbot.Printful.sln.DotSettings.user
