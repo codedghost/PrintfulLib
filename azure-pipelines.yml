@@ -8,9 +8,6 @@ trigger:
 
 pr: none
 
-pool:
-  vmImage: 'ubuntu-latest'
-
 name: 1.0.$(BuildID)
 
 steps:
