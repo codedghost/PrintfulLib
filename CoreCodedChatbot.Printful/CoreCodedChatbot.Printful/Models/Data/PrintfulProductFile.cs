@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CoreCodedChatbot.Printful.Models.Data
+﻿namespace PrintfulLib.Models.Data
 {
     public class PrintfulProductFile
     {

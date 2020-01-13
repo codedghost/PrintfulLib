@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using CoreCodedChatbot.Printful.Interfaces.ExternalClients;
-using CoreCodedChatbot.Printful.Models.ApiResponse;
 using Newtonsoft.Json;
+using PrintfulLib.Interfaces.ExternalClients;
+using PrintfulLib.Models.ApiResponse;
 
-namespace CoreCodedChatbot.Printful.ExternalClients
+namespace PrintfulLib.ExternalClients
 {
     public class PrintfulClient : IPrintfulClient, IDisposable
     {

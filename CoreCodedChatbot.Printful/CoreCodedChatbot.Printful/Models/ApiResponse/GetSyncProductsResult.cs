@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CoreCodedChatbot.Printful.Models.Data;
+﻿using PrintfulLib.Models.Data;
 
-namespace CoreCodedChatbot.Printful.Models.ApiResponse
+namespace PrintfulLib.Models.ApiResponse
 {
     public class GetSyncProductsResult
     {
