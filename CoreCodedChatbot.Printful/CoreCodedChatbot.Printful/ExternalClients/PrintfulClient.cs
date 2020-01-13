@@ -18,13 +18,13 @@ namespace CoreCodedChatbot.Printful.ExternalClients
 
         private HttpClient _printfulApiClient;
         
-        public PrintfulClient(string apiKey, string printfulApiBaseUrl)
+        public PrintfulClient(string apiKey)
         {
             _apiKey = apiKey;
 
             _printfulApiClient = new HttpClient
             {
-                BaseAddress = new Uri(printfulApiBaseUrl),
+                BaseAddress = new Uri("https://api.printful.com/"),
                 DefaultRequestHeaders =
                 {
                     Authorization = new AuthenticationHeaderValue("Basic",
