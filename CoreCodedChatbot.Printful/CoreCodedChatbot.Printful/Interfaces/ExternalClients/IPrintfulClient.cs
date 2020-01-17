@@ -6,8 +6,10 @@ namespace PrintfulLib.Interfaces.ExternalClients
 {
     public interface IPrintfulClient
     {
-        Task<List<GetSyncVariantsResult>> GetAllProducts();
-        Task<List<GetSyncVariantsResult>> GetRelevantProducts(string searchTerm);
+        Task<GetSyncProductsResult> GetAllProducts();
+        Task<GetSyncProductsResult> SearchAllProducts(string searchTerm);
+        Task<List<GetSyncVariantsResult>> GetAllProductsWithVariants();
+        Task<List<GetSyncVariantsResult>> SearchAllProductsWithVariants(string searchTerm);
         Task<GetSyncVariantsResult> GetVariantsById(int id);
     }
 }

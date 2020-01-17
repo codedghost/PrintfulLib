@@ -8,31 +8,26 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PrintfulLib.Interfaces.ExternalClients;
 using PrintfulLib.Models.ApiResponse;
+using PrintfulLib.Services;
 
 namespace PrintfulLib.ExternalClients
 {
-    public class PrintfulClient : IPrintfulClient, IDisposable
+    public class PrintfulClient : IPrintfulClient
     {
-        private string _apiKey;
+        private ProductService _productService;
+        private CountryService _countryService;
+        private ShippingService _shippingService;
+        private TaxesService _taxesService;
 
-        private HttpClient _printfulApiClient;
-        
         public PrintfulClient(string apiKey)
         {
-            _apiKey = apiKey;
-
-            _printfulApiClient = new HttpClient
-            {
-                BaseAddress = new Uri("https://api.printful.com/"),
-                DefaultRequestHeaders =
-                {
-                    Authorization = new AuthenticationHeaderValue("Basic",
-                        Convert.ToBase64String(Encoding.UTF8.GetBytes(apiKey)))
-                }
-            };
+            _productService = new ProductService(apiKey);
+            _countryService = new CountryService(apiKey);
+            _shippingService = new ShippingService(apiKey);
+            _taxesService = new TaxesService(apiKey);
         }
 
-        public async Task<List<GetSyncVariantsResult>> GetAllProducts()
+        public async Task<List<GetSyncVariantsResult>> GetAllProductsWithVariants()
         {
             var result = await _printfulApiClient.GetAsync("store/products");
 
@@ -45,7 +40,7 @@ namespace PrintfulLib.ExternalClients
             return await GetAllVariants(data);
         }
 
-        public async Task<List<GetSyncVariantsResult>> GetRelevantProducts(string searchTerm)
+        public async Task<List<GetSyncVariantsResult>> GetRelevantProductsWithVariants(string searchTerm)
         {
             var result = await _printfulApiClient.GetAsync($"store/products?search={WebUtility.UrlEncode(searchTerm)}");
 
@@ -88,12 +83,6 @@ namespace PrintfulLib.ExternalClients
             }
 
             return results;
-        }
-
-        public void Dispose()
-        {
-            _apiKey = string.Empty;
-            _printfulApiClient.Dispose();
         }
     }
 }
