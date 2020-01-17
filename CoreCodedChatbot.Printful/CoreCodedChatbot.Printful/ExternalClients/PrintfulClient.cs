@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PrintfulLib.Interfaces.ExternalClients;
+using PrintfulLib.Models.ApiRequest;
 using PrintfulLib.Models.ApiResponse;
 using PrintfulLib.Services;
 
@@ -27,62 +28,63 @@ namespace PrintfulLib.ExternalClients
             _taxesService = new TaxesService(apiKey);
         }
 
-        public async Task<List<GetSyncVariantsResult>> GetAllProductsWithVariants()
+        public async Task<GetSyncProductsResponse> GetAllProducts()
         {
-            var result = await _printfulApiClient.GetAsync("store/products");
+            var products = await _productService.GetAllProducts();
 
-            if (!result.IsSuccessStatusCode) return null;
-
-            var jsonString = await result.Content.ReadAsStringAsync();
-
-            var data = JsonConvert.DeserializeObject<GetSyncProductsResult>(jsonString);
-
-            return await GetAllVariants(data);
+            return products;
         }
 
-        public async Task<List<GetSyncVariantsResult>> GetRelevantProductsWithVariants(string searchTerm)
+        public async Task<GetSyncProductsResponse> SearchAllProducts(string searchTerm)
         {
-            var result = await _printfulApiClient.GetAsync($"store/products?search={WebUtility.UrlEncode(searchTerm)}");
+            var products = await _productService.SearchAllProducts(searchTerm);
 
-            if (!result.IsSuccessStatusCode) return null;
-
-            var data = JsonConvert.DeserializeObject<GetSyncProductsResult>(await result.Content.ReadAsStringAsync());
-
-            return await GetAllVariants(data);
+            return products;
         }
 
-        public async Task<GetSyncVariantsResult> GetVariantsById(int id)
+        public async Task<List<GetSyncVariantsResponse>> GetAllProductsWithVariants()
         {
-            return await GetVariants(id);
+            var products = await _productService.GetAllProducts();
+
+            if (products == null)
+                return new List<GetSyncVariantsResponse>();
+
+            var productsWithVariants = await _productService.GetAllVariants(products);
+
+            return productsWithVariants;
         }
 
-        private async Task<GetSyncVariantsResult> GetVariants(int id)
+        public async Task<List<GetSyncVariantsResponse>> SearchAllProductsWithVariants(string searchTerm)
         {
-            var result = await _printfulApiClient.GetAsync($"store/products/{id}");
-            if (!result.IsSuccessStatusCode) return null;
+            var products = await _productService.SearchAllProducts(searchTerm);
 
-            var jsonString = await result.Content.ReadAsStringAsync();
+            if (products == null)
+                return new List<GetSyncVariantsResponse>();
 
-            var syncVariantsResult = JsonConvert.DeserializeObject<GetSyncVariantsResult>(jsonString);
+            var productsWithVariants = await _productService.GetAllVariants(products);
 
-            return syncVariantsResult;
+            return productsWithVariants;
         }
 
-        private async Task<List<GetSyncVariantsResult>> GetAllVariants(GetSyncProductsResult getSyncProductsResult)
+        public async Task<GetSyncVariantsResponse> GetVariantsById(int id)
         {
-            List<GetSyncVariantsResult> results = new List<GetSyncVariantsResult>();
+            var getSyncVariantsResponse = await _productService.GetAllVariantsForProduct(id);
 
-            // Now go get the product images and other info
-            foreach (var item in getSyncProductsResult.Result)
-            {
-                var variant = await GetVariants(item.Id);
+            return getSyncVariantsResponse;
+        }
 
-                if (variant == null) continue;
+        public async Task<GetRequiredTaxStatesResponse> GetRequiredTaxStates()
+        {
+            var getRequiredTaxStatesResponse = await _taxesService.GetRequiredTaxStates();
 
-                results.Add(variant);
-            }
+            return getRequiredTaxStatesResponse;
+        }
 
-            return results;
+        public async Task<CalculateTaxRateResponse> CalculateTaxRate(TaxRequest taxRequest)
+        {
+            var calculateTaxRateResponse = await _taxesService.CalculateTaxRate(taxRequest);
+
+            return calculateTaxRateResponse;
         }
     }
 }

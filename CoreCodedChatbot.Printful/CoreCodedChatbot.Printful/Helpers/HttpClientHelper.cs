@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace PrintfulLib.Helpers
 {
@@ -18,6 +19,15 @@ namespace PrintfulLib.Helpers
                         Convert.ToBase64String(Encoding.UTF8.GetBytes(apiKey)))
                 }
             };
+        }
+
+        internal static ByteArrayContent GetJsonData(object data)
+        {
+            var jsonData = JsonConvert.SerializeObject(data);
+            var byteContent = new ByteArrayContent(Encoding.UTF8.GetBytes(jsonData));
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            return byteContent;
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using Newtonsoft.Json;
+using PrintfulLib.Models.ChildObjects;
 
-namespace PrintfulLib.Models.ChildObjects
+namespace PrintfulLib.Models.ApiResponse
 {
-    public class TaxRateResponse
+    public class CalculateTaxRateResponse
     {
         [JsonProperty("code")]
         public int Code { get; set; }
