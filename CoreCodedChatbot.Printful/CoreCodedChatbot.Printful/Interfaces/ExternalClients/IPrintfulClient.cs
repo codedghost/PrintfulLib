@@ -15,5 +15,6 @@ namespace PrintfulLib.Interfaces.ExternalClients
         Task<GetRequiredTaxStatesResponse> GetRequiredTaxStates();
         Task<CalculateTaxRateResponse> CalculateTaxRate(TaxRequest taxRequest);
         Task<CalculateShippingRatesResponse> CalculateShippingRates(ShippingRequest shippingRequest);
+        Task<GetCountryListResponse> GetCountryList();
     }
 }
