@@ -86,5 +86,12 @@ namespace PrintfulLib.ExternalClients
 
             return calculateTaxRateResponse;
         }
+
+        public async Task<CalculateShippingRatesResponse> CalculateShippingRates(ShippingRequest shippingRequest)
+        {
+            var calculateShippingRatesResponse = await _shippingService.CalculateShippingRates(shippingRequest);
+
+            return calculateShippingRatesResponse;
+        }
     }
 }
