@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using PrintfulLib.Models.ApiRequest;
 using PrintfulLib.Models.ApiResponse;
 
 namespace PrintfulLib.Interfaces.ExternalClients
@@ -12,5 +13,6 @@ namespace PrintfulLib.Interfaces.ExternalClients
         Task<List<GetSyncVariantsResponse>> SearchAllProductsWithVariants(string searchTerm);
         Task<GetSyncVariantsResponse> GetVariantsById(int id);
         Task<GetRequiredTaxStatesResponse> GetRequiredTaxStates();
+        Task<CalculateTaxRateResponse> CalculateTaxRate(TaxRequest taxRequest);
     }
 }
