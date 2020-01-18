@@ -93,5 +93,12 @@ namespace PrintfulLib.ExternalClients
 
             return calculateShippingRatesResponse;
         }
+
+        public async Task<GetCountryListResponse> GetCountryList()
+        {
+            var countryList = await _countryService.GetCountryList();
+
+            return countryList;
+        }
     }
 }
