@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoreCodedChatbot.Printful\PrintfulLib.csproj" />
+    <ProjectReference Include="..\PrintfulLib\PrintfulLib.csproj" />
   </ItemGroup>
 
 </Project>

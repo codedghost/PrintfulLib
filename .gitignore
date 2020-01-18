@@ -15,3 +15,11 @@
 /CoreCodedChatbot.Printful/.vs/PrintfulLib/DesignTimeBuild/.dtbcache
 /.vs/PrintfulLib/v16
 /.vs/slnx.sqlite
+/PrintfulLib/.vs/PrintfulLib
+/PrintfulLib/PrintfulLib/bin/Debug/netcoreapp3.0
+/PrintfulLib/PrintfulLib/obj
+/PrintfulLib/TestHarness/bin/Debug/netcoreapp3.1
+/PrintfulLib/TestHarness/obj
+/PrintfulLib/PrintfulLib.sln.DotSettings.user
+/PrintfulLib/CoreCodedChatbot.Printful.sln.DotSettings.user
+/PrintfulLib/.Printful.sln.DotSettings.user
