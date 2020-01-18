@@ -19,6 +19,7 @@ namespace PrintfulLib.ExternalClients
         private CountryService _countryService;
         private ShippingService _shippingService;
         private TaxesService _taxesService;
+        private StoreInformationService _storeInformationService;
 
         public PrintfulClient(string apiKey)
         {
@@ -26,6 +27,7 @@ namespace PrintfulLib.ExternalClients
             _countryService = new CountryService(apiKey);
             _shippingService = new ShippingService(apiKey);
             _taxesService = new TaxesService(apiKey);
+            _storeInformationService = new StoreInformationService(apiKey);
         }
 
         public async Task<GetSyncProductsResponse> GetAllProducts()
@@ -99,6 +101,13 @@ namespace PrintfulLib.ExternalClients
             var countryList = await _countryService.GetCountryList();
 
             return countryList;
+        }
+
+        public async Task<GetStoreInformationResponse> GetStoreInformation()
+        {
+            var storeInformation = await _storeInformationService.GetStoreInformation();
+
+            return storeInformation;
         }
     }
 }

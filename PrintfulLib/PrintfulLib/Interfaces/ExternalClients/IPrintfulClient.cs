@@ -16,5 +16,6 @@ namespace PrintfulLib.Interfaces.ExternalClients
         Task<CalculateTaxRateResponse> CalculateTaxRate(TaxRequest taxRequest);
         Task<CalculateShippingRatesResponse> CalculateShippingRates(ShippingRequest shippingRequest);
         Task<GetCountryListResponse> GetCountryList();
+        Task<GetStoreInformationResponse> GetStoreInformation();
     }
 }
