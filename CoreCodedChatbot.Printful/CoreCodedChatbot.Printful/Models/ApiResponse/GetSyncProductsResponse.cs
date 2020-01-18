@@ -1,8 +1,8 @@
-﻿using PrintfulLib.Models.Data;
+﻿using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Models.ApiResponse
 {
-    public class GetSyncProductsResult
+    public class GetSyncProductsResponse
     {
         public int Code { get; set; }
         public SyncProduct[] Result { get; set; }
