@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrintfulLib", "CoreCodedChatbot.Printful\PrintfulLib.csproj", "{7A7F793C-E6C5-43EB-989D-78083936EBAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrintfulLib", "PrintfulLib\PrintfulLib.csproj", "{7A7F793C-E6C5-43EB-989D-78083936EBAC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHarness", "TestHarness\TestHarness.csproj", "{116A94F1-19A0-4A5D-A925-475DCB80F275}"
 EndProject
