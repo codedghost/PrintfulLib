@@ -109,5 +109,12 @@ namespace PrintfulLib.ExternalClients
 
             return storeInformation;
         }
+
+        public async Task<ChangePackingSlipResponse> ChangePackingSlip(ChangePackingSlipRequest request)
+        {
+            var result = await _storeInformationService.ChangePackingSlip(request);
+
+            return result;
+        }
     }
 }
