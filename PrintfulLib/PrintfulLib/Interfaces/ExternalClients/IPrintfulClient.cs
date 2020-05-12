@@ -18,5 +18,6 @@ namespace PrintfulLib.Interfaces.ExternalClients
         Task<GetCountryListResponse> GetCountryList();
         Task<GetStoreInformationResponse> GetStoreInformation();
         Task<ChangePackingSlipResponse> ChangePackingSlip(ChangePackingSlipRequest request);
+        Task<GetWarehouseProductsResponse> GetWarehouseProducts(GetWarehouseProductsRequest request);
     }
 }
