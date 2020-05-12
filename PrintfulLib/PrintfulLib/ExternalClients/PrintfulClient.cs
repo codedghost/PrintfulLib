@@ -116,5 +116,10 @@ namespace PrintfulLib.ExternalClients
 
             return result;
         }
+
+        public async Task<GetWarehouseProductsResponse> GetWarehouseProducts()
+        {
+
+        }
     }
 }
