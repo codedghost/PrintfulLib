@@ -21,5 +21,12 @@ namespace PrintfulLib.Interfaces.ExternalClients
         Task<GetWarehouseProductsResponse> GetWarehouseProducts(GetWarehouseProductsRequest request);
         Task<GetWarehouseProductDataResponse> GetWarehouseProductData(GetWarehouseProductDataRequest request);
         Task<CreateWarehouseProductResponse> CreateWarehouseProduct(CreateWarehouseProductRequest request);
+        Task<GetWarehouseShipmentsResponse> GetWarehouseShipments(GetWarehouseShipmentsRequest request);
+
+        Task<GetWarehouseShipmentDataResponse> GetWarehouseShipmentData(
+            GetWarehouseShipmentDataRequest request);
+
+        Task<CreateWarehouseShipmentResponse> CreateWarehouseShipment(
+            CreateWarehouseShipmentRequest request);
     }
 }
