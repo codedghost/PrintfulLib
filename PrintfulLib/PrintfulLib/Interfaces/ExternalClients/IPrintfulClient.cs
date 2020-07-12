@@ -28,5 +28,9 @@ namespace PrintfulLib.Interfaces.ExternalClients
 
         Task<CreateWarehouseShipmentResponse> CreateWarehouseShipment(
             CreateWarehouseShipmentRequest request);
+
+        Task<GetFilesResponse> GetFiles(GetFilesRequest request);
+        Task<GetFileInformationResponse> GetFileInformation(GetFileInformationRequest request);
+        Task<AddFileResponse> AddFile(AddFileRequest request);
     }
 }
