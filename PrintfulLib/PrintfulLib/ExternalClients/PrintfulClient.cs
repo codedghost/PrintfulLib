@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using PrintfulLib.Interfaces.ExternalClients;
 using PrintfulLib.Models.ApiRequest;
 using PrintfulLib.Models.ApiResponse;
@@ -20,6 +14,7 @@ namespace PrintfulLib.ExternalClients
         private ShippingService _shippingService;
         private TaxesService _taxesService;
         private StoreInformationService _storeInformationService;
+        private WarehouseProductsService _warehouseProductsService;
 
         public PrintfulClient(string apiKey)
         {
@@ -28,6 +23,7 @@ namespace PrintfulLib.ExternalClients
             _shippingService = new ShippingService(apiKey);
             _taxesService = new TaxesService(apiKey);
             _storeInformationService = new StoreInformationService(apiKey);
+            _warehouseProductsService = new WarehouseProductsService(apiKey);
         }
 
         public async Task<GetSyncProductsResponse> GetAllProducts()
@@ -113,6 +109,27 @@ namespace PrintfulLib.ExternalClients
         public async Task<ChangePackingSlipResponse> ChangePackingSlip(ChangePackingSlipRequest request)
         {
             var result = await _storeInformationService.ChangePackingSlip(request);
+
+            return result;
+        }
+
+        public async Task<GetWarehouseProductsResponse> GetWarehouseProducts(GetWarehouseProductsRequest request)
+        {
+            var result = await _warehouseProductsService.GetWarehouseProducts(request);
+
+            return result;
+        }
+
+        public async Task<GetWarehouseProductDataResponse> GetWarehouseProductData(GetWarehouseProductDataRequest request)
+        {
+            var result = await _warehouseProductsService.GetWarehouseProductData(request);
+
+            return result;
+        }
+
+        public async Task<CreateWarehouseProductResponse> CreateWarehouseProduct(CreateWarehouseProductRequest request)
+        {
+            var result = await _warehouseProductsService.CreateWarehouseProduct(request);
 
             return result;
         }

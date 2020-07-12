@@ -3,12 +3,12 @@ using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Models.ApiResponse
 {
-    public class CalculateShippingRatesResponse
+    public class CreateWarehouseProductResponse
     {
+
         [JsonProperty("code")]
         public int ResponseCode { get; set; }
-
         [JsonProperty("result")]
-        public ShippingInfo[] ShippingOptions { get; set; }
+        public WarehouseProduct WarehouseProduct { get; set; }
     }
 }
