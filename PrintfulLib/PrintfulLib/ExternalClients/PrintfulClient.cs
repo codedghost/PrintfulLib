@@ -16,6 +16,7 @@ namespace PrintfulLib.ExternalClients
         private StoreInformationService _storeInformationService;
         private WarehouseProductsService _warehouseProductsService;
         private WarehouseShipmentsService _warehouseShipmentsService;
+        private FileLibraryService _fileLibraryService;
 
         public PrintfulClient(string apiKey)
         {
@@ -26,6 +27,7 @@ namespace PrintfulLib.ExternalClients
             _storeInformationService = new StoreInformationService(apiKey);
             _warehouseProductsService = new WarehouseProductsService(apiKey);
             _warehouseShipmentsService = new WarehouseShipmentsService(apiKey);
+            _fileLibraryService = new FileLibraryService(apiKey);
         }
 
         public async Task<GetSyncProductsResponse> GetAllProducts()
@@ -155,6 +157,27 @@ namespace PrintfulLib.ExternalClients
             CreateWarehouseShipmentRequest request)
         {
             var result = await _warehouseShipmentsService.CreateWarehouseShipment(request);
+
+            return result;
+        }
+
+        public async Task<GetFilesResponse> GetFiles(GetFilesRequest request)
+        {
+            var result = await _fileLibraryService.GetFiles(request);
+
+            return result;
+        }
+
+        public async Task<GetFileInformationResponse> GetFileInformation(GetFileInformationRequest request)
+        {
+            var result = await _fileLibraryService.GetFileInformation(request);
+
+            return result;
+        }
+
+        public async Task<AddFileResponse> AddFile(AddFileRequest request)
+        {
+            var result = await _fileLibraryService.AddFile(request);
 
             return result;
         }

@@ -8,28 +8,27 @@ using PrintfulLib.Models.ApiResponse;
 
 namespace PrintfulLib.Services
 {
-    public class WarehouseShipmentsService
+    public class FileLibraryService
     {
         private HttpClient _client;
 
-        public WarehouseShipmentsService(string apiKey)
+        public FileLibraryService(string apiKey)
         {
             _client = HttpClientHelper.GetPrintfulClient(apiKey);
         }
 
-        public async Task<GetWarehouseShipmentsResponse> GetWarehouseShipments(GetWarehouseShipmentsRequest request)
+        public async Task<GetFilesResponse> GetFiles(GetFilesRequest request)
         {
             if (request == null || request.Limit == 0)
                 throw new Exception("No data provided to request");
             if (request.Limit > 100)
-                throw new Exception("Maximum number of items per page is 100");
+                throw new Exception($"Maximum number of items per page is 100");
 
             var filterQueryString = string.IsNullOrWhiteSpace(request.FilterStatus)
                 ? string.Empty
                 : $"&status={request.FilterStatus}";
             var apiResponse =
-                await _client.GetAsync(
-                    $"warehouse/shipments?offset={request.Offset}&limit={request.Limit}{filterQueryString}");
+                await _client.GetAsync($"files?offset={request.Offset}&limit={request.Limit}{filterQueryString}");
 
             if (!apiResponse.IsSuccessStatusCode)
                 throw new Exception(
@@ -37,44 +36,41 @@ namespace PrintfulLib.Services
 
             var jsonString = await apiResponse.Content.ReadAsStringAsync();
 
-            var data = JsonConvert.DeserializeObject<GetWarehouseShipmentsResponse>(jsonString);
+            var data = JsonConvert.DeserializeObject<GetFilesResponse>(jsonString);
 
             return data;
         }
 
-        public async Task<GetWarehouseShipmentDataResponse> GetWarehouseShipmentData(
-            GetWarehouseShipmentDataRequest request)
+        public async Task<GetFileInformationResponse> GetFileInformation(GetFileInformationRequest request)
         {
-            if (request == null || request.WarehouseShipmentId == 0)
+            if (request == null || request.FileId == 0)
                 throw new Exception("No data provided to request");
 
-            var apiResponse = await _client.GetAsync($"warehouse/shipments/{request.WarehouseShipmentId}");
+            var apiResponse = await _client.GetAsync($"files/{request.FileId}");
 
             if (!apiResponse.IsSuccessStatusCode)
                 throw new Exception($"Api responded with status code: {apiResponse.StatusCode}. Reason: {apiResponse.ReasonPhrase}");
 
             var jsonString = await apiResponse.Content.ReadAsStringAsync();
 
-            var data = JsonConvert.DeserializeObject<GetWarehouseShipmentDataResponse>(jsonString);
+            var data = JsonConvert.DeserializeObject<GetFileInformationResponse>(jsonString);
 
             return data;
         }
 
-        public async Task<CreateWarehouseShipmentResponse> CreateWarehouseShipment(
-            CreateWarehouseShipmentRequest request)
+        public async Task<AddFileResponse> AddFile(AddFileRequest request)
         {
-            if (request == null || request.ShipmentId == 0)
+            if (string.IsNullOrWhiteSpace(request?.File?.Url))
                 throw new Exception("No data provided to request");
 
-            var apiResponse = await _client.PostAsync("warehouse/shipments", HttpClientHelper.GetJsonData(request));
+            var apiResponse = await _client.PostAsync("files", HttpClientHelper.GetJsonData(request.File));
 
             if (!apiResponse.IsSuccessStatusCode)
-                throw new Exception(
-                    $"Api responded with status code: {apiResponse.StatusCode}. Reason: {apiResponse.ReasonPhrase}");
+                throw new Exception($"Api responded with status code: {apiResponse.StatusCode}. Reason: {apiResponse.ReasonPhrase}");
 
             var jsonString = await apiResponse.Content.ReadAsStringAsync();
 
-            var data = JsonConvert.DeserializeObject<CreateWarehouseShipmentResponse>(jsonString);
+            var data = JsonConvert.DeserializeObject<AddFileResponse>(jsonString);
 
             return data;
         }
