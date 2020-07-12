@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Models.ApiResponse

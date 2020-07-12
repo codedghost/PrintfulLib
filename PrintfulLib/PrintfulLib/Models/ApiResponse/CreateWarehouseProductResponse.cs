@@ -3,8 +3,9 @@ using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Models.ApiResponse
 {
-    public class GetWarehouseProductDataResponse
+    public class CreateWarehouseProductResponse
     {
+
         [JsonProperty("code")]
         public int ResponseCode { get; set; }
         [JsonProperty("result")]

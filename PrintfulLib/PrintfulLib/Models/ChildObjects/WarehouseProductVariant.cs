@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace PrintfulLib.Models.ChildObjects
 {

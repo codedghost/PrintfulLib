@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PrintfulLib.Helpers;
@@ -53,6 +52,29 @@ namespace PrintfulLib.Services
             var jsonString = await apiResponse.Content.ReadAsStringAsync();
 
             var data = JsonConvert.DeserializeObject<GetWarehouseProductDataResponse>(jsonString);
+
+            return data;
+        }
+
+        public async Task<CreateWarehouseProductResponse> CreateWarehouseProduct(CreateWarehouseProductRequest request)
+        {
+            if (request?.WarehouseProduct == null)
+                throw new Exception("No data provided to create a Warehouse Product");
+
+            if (!request.AcceptTermsAndConditions)
+            {
+                throw new Exception("Terms and Conditions must be accepted");
+            }
+
+            var apiResponse = await _client.PostAsync("warehouse/products", HttpClientHelper.GetJsonData(request));
+
+            if (!apiResponse.IsSuccessStatusCode)
+                throw new Exception(
+                    $"Api responded with status code: {apiResponse.StatusCode}. Reason: {apiResponse.ReasonPhrase}");
+
+            var jsonString = await apiResponse.Content.ReadAsStringAsync();
+
+            var data = JsonConvert.DeserializeObject<CreateWarehouseProductResponse>(jsonString);
 
             return data;
 

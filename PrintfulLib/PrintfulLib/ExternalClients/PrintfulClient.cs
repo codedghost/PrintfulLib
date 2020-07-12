@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using PrintfulLib.Interfaces.ExternalClients;
 using PrintfulLib.Models.ApiRequest;
 using PrintfulLib.Models.ApiResponse;
@@ -129,6 +123,13 @@ namespace PrintfulLib.ExternalClients
         public async Task<GetWarehouseProductDataResponse> GetWarehouseProductData(GetWarehouseProductDataRequest request)
         {
             var result = await _warehouseProductsService.GetWarehouseProductData(request);
+
+            return result;
+        }
+
+        public async Task<CreateWarehouseProductResponse> CreateWarehouseProduct(CreateWarehouseProductRequest request)
+        {
+            var result = await _warehouseProductsService.CreateWarehouseProduct(request);
 
             return result;
         }
