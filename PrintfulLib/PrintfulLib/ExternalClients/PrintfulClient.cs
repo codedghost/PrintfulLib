@@ -126,7 +126,7 @@ namespace PrintfulLib.ExternalClients
             return result;
         }
 
-        public async Task<GetWarehouseProductDataResponse> GetWarehoouseProductData(GetWarehouseProductDataRequest request)
+        public async Task<GetWarehouseProductDataResponse> GetWarehouseProductData(GetWarehouseProductDataRequest request)
         {
             var result = await _warehouseProductsService.GetWarehouseProductData(request);
 
