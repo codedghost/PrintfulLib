@@ -37,5 +37,25 @@ namespace PrintfulLib.Services
 
             return data;
         }
+
+        public async Task<GetWarehouseProductDataResponse> GetWarehouseProductData(
+            GetWarehouseProductDataRequest request)
+        {
+            if (request == null || request.WarehouseProductId == 0)
+                throw new Exception("No data provided to request");
+
+            var apiResponse = await _client.GetAsync($"warehouse/products/{request.WarehouseProductId}");
+
+            if (!apiResponse.IsSuccessStatusCode)
+                throw new Exception(
+                    $"Api responded with status code: {apiResponse.StatusCode}. Reason: {apiResponse.ReasonPhrase}");
+
+            var jsonString = await apiResponse.Content.ReadAsStringAsync();
+
+            var data = JsonConvert.DeserializeObject<GetWarehouseProductDataResponse>(jsonString);
+
+            return data;
+
+        }
     }
 }
