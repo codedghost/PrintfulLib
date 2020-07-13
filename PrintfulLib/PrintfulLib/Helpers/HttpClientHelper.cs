@@ -8,9 +8,9 @@ namespace PrintfulLib.Helpers
 {
     internal static class HttpClientHelper
     {
-        internal static HttpClient GetPrintfulClient(string apiKey)
+        internal static PrintfulHttpClient GetPrintfulClient(string apiKey)
         {
-            return new HttpClient
+            return new PrintfulHttpClient
             {
                 BaseAddress = new Uri("https://api.printful.com/"),
                 DefaultRequestHeaders =
