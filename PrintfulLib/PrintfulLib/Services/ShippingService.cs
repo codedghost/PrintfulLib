@@ -9,7 +9,7 @@ namespace PrintfulLib.Services
 {
     internal class ShippingService
     {
-        private HttpClient _client;
+        private PrintfulHttpClient _client;
 
         internal ShippingService(string apiKey)
         {
@@ -18,16 +18,10 @@ namespace PrintfulLib.Services
 
         internal async Task<CalculateShippingRatesResponse> CalculateShippingRates(ShippingRequest request)
         {
-            var apiResponse = await _client.PostAsync("shipping/rates", HttpClientHelper.GetJsonData(request));
+            var apiResponse =
+                await _client.PostAsync<CalculateShippingRatesResponse, ShippingRequest>("shipping/rates", request);
 
-            if (!apiResponse.IsSuccessStatusCode)
-                return null;
-
-            var jsonString = await apiResponse.Content.ReadAsStringAsync();
-
-            var data = JsonConvert.DeserializeObject<CalculateShippingRatesResponse>(jsonString);
-
-            return data;
+            return apiResponse;
         }
     }
 }
