@@ -9,7 +9,7 @@ namespace PrintfulLib.Services
 {
     internal class TaxesService
     {
-        private readonly HttpClient _client;
+        private readonly PrintfulHttpClient _client;
 
         internal TaxesService(string apiKey)
         {
@@ -18,28 +18,16 @@ namespace PrintfulLib.Services
 
         internal async Task<GetRequiredTaxStatesResponse> GetRequiredTaxStates()
         {
-            var apiResponse = await _client.GetAsync("tax/countries");
+            var apiResponse = await _client.GetAsync<GetRequiredTaxStatesResponse>("tax/countries");
 
-            if (!apiResponse.IsSuccessStatusCode) return null;
-
-            var jsonString = await apiResponse.Content.ReadAsStringAsync();
-
-            var data = JsonConvert.DeserializeObject<GetRequiredTaxStatesResponse>(jsonString);
-
-            return data;
+            return apiResponse;
         }
 
         public async Task<CalculateTaxRateResponse> CalculateTaxRate(TaxRequest taxRequest)
         {
-            var apiResponse = await _client.PostAsync("tax/rates", HttpClientHelper.GetJsonData(taxRequest));
+            var apiResponse = await _client.PostAsync<CalculateTaxRateResponse, TaxRequest>("tax/rates", taxRequest);
 
-            if (!apiResponse.IsSuccessStatusCode) return null;
-
-            var jsonString = await apiResponse.Content.ReadAsStringAsync();
-
-            var data = JsonConvert.DeserializeObject<CalculateTaxRateResponse>(jsonString);
-
-            return data;
+            return apiResponse;
         }
     }
 }
