@@ -5,12 +5,13 @@ using Newtonsoft.Json;
 using PrintfulLib.Helpers;
 using PrintfulLib.Models.ApiRequest;
 using PrintfulLib.Models.ApiResponse;
+using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Services
 {
     public class FileLibraryService
     {
-        private HttpClient _client;
+        private PrintfulHttpClient _client;
 
         public FileLibraryService(string apiKey)
         {
@@ -27,18 +28,11 @@ namespace PrintfulLib.Services
             var filterQueryString = string.IsNullOrWhiteSpace(request.FilterStatus)
                 ? string.Empty
                 : $"&status={request.FilterStatus}";
+
             var apiResponse =
-                await _client.GetAsync($"files?offset={request.Offset}&limit={request.Limit}{filterQueryString}");
+                await _client.GetAsync<GetFilesResponse>($"files?offset={request.Offset}&limit={request.Limit}{filterQueryString}");
 
-            if (!apiResponse.IsSuccessStatusCode)
-                throw new Exception(
-                    $"Api responded with status code: {apiResponse.StatusCode}. Reason: {apiResponse.ReasonPhrase}");
-
-            var jsonString = await apiResponse.Content.ReadAsStringAsync();
-
-            var data = JsonConvert.DeserializeObject<GetFilesResponse>(jsonString);
-
-            return data;
+            return apiResponse;
         }
 
         public async Task<GetFileInformationResponse> GetFileInformation(GetFileInformationRequest request)
@@ -46,16 +40,9 @@ namespace PrintfulLib.Services
             if (request == null || request.FileId == 0)
                 throw new Exception("No data provided to request");
 
-            var apiResponse = await _client.GetAsync($"files/{request.FileId}");
+            var apiResponse = await _client.GetAsync<GetFileInformationResponse>($"files/{request.FileId}");
 
-            if (!apiResponse.IsSuccessStatusCode)
-                throw new Exception($"Api responded with status code: {apiResponse.StatusCode}. Reason: {apiResponse.ReasonPhrase}");
-
-            var jsonString = await apiResponse.Content.ReadAsStringAsync();
-
-            var data = JsonConvert.DeserializeObject<GetFileInformationResponse>(jsonString);
-
-            return data;
+            return apiResponse;
         }
 
         public async Task<AddFileResponse> AddFile(AddFileRequest request)
@@ -63,16 +50,9 @@ namespace PrintfulLib.Services
             if (string.IsNullOrWhiteSpace(request?.File?.Url))
                 throw new Exception("No data provided to request");
 
-            var apiResponse = await _client.PostAsync("files", HttpClientHelper.GetJsonData(request.File));
+            var apiResponse = await _client.PostAsync<AddFileResponse, File>("files", request.File);
 
-            if (!apiResponse.IsSuccessStatusCode)
-                throw new Exception($"Api responded with status code: {apiResponse.StatusCode}. Reason: {apiResponse.ReasonPhrase}");
-
-            var jsonString = await apiResponse.Content.ReadAsStringAsync();
-
-            var data = JsonConvert.DeserializeObject<AddFileResponse>(jsonString);
-
-            return data;
+            return apiResponse;
         }
     }
 }
