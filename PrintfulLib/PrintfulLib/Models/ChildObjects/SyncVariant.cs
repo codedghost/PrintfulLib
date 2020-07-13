@@ -32,6 +32,6 @@ namespace PrintfulLib.Models.ChildObjects
         public PrintfulBasicProduct Product { get; set; }
 
         [JsonProperty("files")]
-        public PrintfulProductFile[] Files { get; set; }
+        public File[] Files { get; set; }
     }
 }

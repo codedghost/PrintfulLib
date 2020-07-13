@@ -1,65 +1,68 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PrintfulLib.Helpers;
+using PrintfulLib.Models.ApiRequest;
 using PrintfulLib.Models.ApiResponse;
 
 namespace PrintfulLib.Services
 {
     internal class ProductService
     {
-        private readonly HttpClient _client;
+        private readonly PrintfulHttpClient _client;
 
         internal ProductService(string apiKey)
         {
             _client = HttpClientHelper.GetPrintfulClient(apiKey);
         }
 
-        internal async Task<GetSyncProductsResponse> GetAllProducts()
+        internal async Task<GetSyncProductsResponse> GetProducts(GetProductsRequest request)
         {
-            var result = await _client.GetAsync("store/products");
+            if (request.Limit == 0) request.Limit = 100;
+            if (request.Limit > 100)
+                throw new Exception("Maximum number of records that can be retrieved is 100");
 
-            if (!result.IsSuccessStatusCode) return null;
+            var statusString = string.IsNullOrEmpty(request.FilterStatus)
+                ? string.Empty
+                : $"&status={request.FilterStatus}";
+            var searchString = string.IsNullOrEmpty(request.SearchTerms)
+                ? string.Empty
+                : $"&search={request.SearchTerms}";
 
-            var jsonString = await result.Content.ReadAsStringAsync();
+            var apiResponse = await _client.GetAsync<GetSyncProductsResponse>(
+                $"store/products?limit={request.Limit}&offset={request.Offset}{statusString}{searchString}");
 
-            var data = JsonConvert.DeserializeObject<GetSyncProductsResponse>(jsonString);
-
-            return data;
+            return apiResponse;
         }
 
-        internal async Task<GetSyncProductsResponse> SearchAllProducts(string searchTerm)
+        internal async Task<GetProductAndVariantsResponse> GetProductAndVariants(GetProductAndVariantsRequest request)
         {
-            var result = await _client.GetAsync($"store/products?search={WebUtility.UrlEncode(searchTerm)}");
+            if ((request?.ProductId ?? 0) == 0)
+                throw new Exception("No data provided to API");
 
-            if (!result.IsSuccessStatusCode) return null;
+            var apiResponse =
+                await _client.GetAsync<GetProductAndVariantsResponse>($"store/products/{request.ProductId}");
 
-            var jsonString = await result.Content.ReadAsStringAsync();
+            return apiResponse;
+        }
 
-            var data = JsonConvert.DeserializeObject<GetSyncProductsResponse>(jsonString);
+        internal async Task<CreateNewProductResponse> CreateProduct(CreateNewProductRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(request?.RequestProduct?.ProductName) ||
+                !request.RequestVariants.Any())
+                throw new Exception("Must provide a product with product name and at least one variant with variant id and at least one variant file with either id or url");
 
-            return data;
+            var apiResponse =
+                await _client.PostAsync<CreateNewProductResponse, CreateNewProductRequest>("store/products", request);
+
+            return apiResponse;
         }
 
 
-        internal async Task<List<GetSyncVariantsResponse>> GetAllVariants(GetSyncProductsResponse getSyncProductsResponse)
-        {
-            List<GetSyncVariantsResponse> results = new List<GetSyncVariantsResponse>();
-
-            // Now go get the product images and other info
-            foreach (var item in getSyncProductsResponse.Result)
-            {
-                var variant = await GetVariants(item.Id);
-
-                if (variant == null) continue;
-
-                results.Add(variant);
-            }
-
-            return results;
-        }
 
         private async Task<GetSyncVariantsResponse> GetVariants(int id)
         {

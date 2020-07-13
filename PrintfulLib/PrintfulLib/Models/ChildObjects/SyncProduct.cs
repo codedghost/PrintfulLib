@@ -18,5 +18,8 @@ namespace PrintfulLib.Models.ChildObjects
 
         [JsonProperty("synced")]
         public int Synced { get; set; }
+
+        [JsonProperty("thumbnail_url")]
+        public string ThumbnailUrl { get; set; }
     }
 }
