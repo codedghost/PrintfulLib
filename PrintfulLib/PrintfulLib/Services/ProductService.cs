@@ -62,7 +62,17 @@ namespace PrintfulLib.Services
             return apiResponse;
         }
 
+        internal async Task<DeleteProductResponse> DeleteProduct(DeleteProductRequest request)
+        {
+            if (request == null || request.ProductId != 0 || !string.IsNullOrWhiteSpace(request.ExternalId))
+                throw new Exception("A ProductID or ExternalID must be provided");
 
+            var idString = request.ProductId > 0 ? request.ProductId.ToString() : $"@{request.ExternalId}";
+
+            var apiResponse = await _client.DeleteAsync<DeleteProductResponse>($"store/products/{idString}");
+
+            return apiResponse;
+        }
 
         private async Task<GetSyncVariantsResponse> GetVariants(int id)
         {

@@ -23,6 +23,13 @@ namespace PrintfulLib
             return await ProcessResponse<T1>(apiResponse);
         }
 
+        public async Task<T> DeleteAsync<T>(string url)
+        {
+            var apiResponse = await this.DeleteAsync(url);
+
+            return await ProcessResponse<T>(apiResponse);
+        }
+
         private async Task<T> ProcessResponse<T>(HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)
