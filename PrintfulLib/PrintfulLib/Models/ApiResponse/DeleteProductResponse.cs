@@ -3,11 +3,8 @@ using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Models.ApiResponse
 {
-    public class DeleteProductResponse
+    public class DeleteProductResponse : PrintfulApiResponseBaseModel
     {
-        [JsonProperty("code")]
-        public int StatusCode { get; set; }
-
         [JsonProperty("result")]
         public ProductInfo ProductInfo{ get; set; }
     }

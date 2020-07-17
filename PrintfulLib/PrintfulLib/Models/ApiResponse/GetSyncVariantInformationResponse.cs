@@ -3,9 +3,9 @@ using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Models.ApiResponse
 {
-    public class GetCountryListResponse : PrintfulApiResponseBaseModel
+    public class GetSyncVariantInformationResponse : PrintfulApiResponseBaseModel
     {
         [JsonProperty("result")] 
-        public Country[] Countries { get; set; }
+        public SyncVariantInfo SyncVariantInfo { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using PrintfulLib.Helpers;
 using PrintfulLib.Models.ApiRequest;
 using PrintfulLib.Models.ApiResponse;
+using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Services
 {
@@ -41,11 +42,13 @@ namespace PrintfulLib.Services
 
         internal async Task<GetProductAndVariantsResponse> GetProductAndVariants(GetProductAndVariantsRequest request)
         {
-            if ((request?.ProductId ?? 0) == 0)
+            if (request == null)
                 throw new Exception("No data provided to API");
 
+            var idString = GetProductIdOrExternalId(request.ProductId, request.ExternalId);
+
             var apiResponse =
-                await _client.GetAsync<GetProductAndVariantsResponse>($"store/products/{request.ProductId}");
+                await _client.GetAsync<GetProductAndVariantsResponse>($"store/products/{idString}");
 
             return apiResponse;
         }
@@ -64,32 +67,38 @@ namespace PrintfulLib.Services
 
         internal async Task<DeleteProductResponse> DeleteProduct(DeleteProductRequest request)
         {
-            if (request == null || request.ProductId != 0 || !string.IsNullOrWhiteSpace(request.ExternalId))
-                throw new Exception("A ProductID or ExternalID must be provided");
+            if (request == null)
+                throw new Exception("No data provided to API");
 
-            var idString = request.ProductId > 0 ? request.ProductId.ToString() : $"@{request.ExternalId}";
+            var idString = GetProductIdOrExternalId(request.ProductId, request.ExternalId);
 
             var apiResponse = await _client.DeleteAsync<DeleteProductResponse>($"store/products/{idString}");
 
             return apiResponse;
         }
 
-        private async Task<GetSyncVariantsResponse> GetVariants(int id)
+        internal async Task<ModifyProductResponse> ModifyProduct(ModifyProductRequest request)
         {
-            var result = await _client.GetAsync($"store/products/{id}");
+            if (request == null)
+                throw new Exception("No data provided to API");
 
-            if (!result.IsSuccessStatusCode) return null;
+            var idString = GetProductIdOrExternalId(request.ProductId, request.ExternalId);
 
-            var jsonString = await result.Content.ReadAsStringAsync();
+            var apiResponse =
+                await _client.PutAsync<ModifyProductResponse, PutRequestProductBody>($"store/products/{idString}",
+                    request.PutRequestProductBody);
 
-            var syncVariantsResult = JsonConvert.DeserializeObject<GetSyncVariantsResponse>(jsonString);
-
-            return syncVariantsResult;
+            return apiResponse;
         }
 
-        internal async Task<GetSyncVariantsResponse> GetAllVariantsForProduct(int id)
+        private string GetProductIdOrExternalId(int productId, string externalId)
         {
-            return await GetVariants(id);
+            if (productId == 0 && string.IsNullOrWhiteSpace(externalId))
+                throw new Exception("A ProductID or an ExternalID must be provided");
+
+            var idString = productId > 0 ? productId.ToString() : $"@{externalId}";
+
+            return idString;
         }
     }
 }

@@ -3,10 +3,9 @@ using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Models.ApiResponse
 {
-    public class AddFileResponse: PrintfulApiResponseBaseModel
+    public class ModifyProductResponse : PrintfulApiResponseBaseModel
     {
-
         [JsonProperty("result")]
-        public File File { get; set; }
+        public RequestProductResponse RequestProductResponse { get; set; }
     }
 }

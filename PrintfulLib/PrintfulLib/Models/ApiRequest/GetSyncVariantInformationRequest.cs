@@ -1,8 +1,8 @@
 ﻿namespace PrintfulLib.Models.ApiRequest
 {
-    public class GetProductAndVariantsRequest
+    public class GetSyncVariantInformationRequest
     {
-        public int ProductId { get; set; }
+        public int VariantId { get; set; }
         public string ExternalId { get; set; }
     }
 }

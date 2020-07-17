@@ -30,6 +30,13 @@ namespace PrintfulLib
             return await ProcessResponse<T>(apiResponse);
         }
 
+        public async Task<T1> PutAsync<T1, T2>(string url, T2 requestObject)
+        {
+            var apiResponse = await this.PutAsync(url, HttpClientHelper.GetJsonData(requestObject));
+
+            return await ProcessResponse<T1>(apiResponse);
+        }
+
         private async Task<T> ProcessResponse<T>(HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)

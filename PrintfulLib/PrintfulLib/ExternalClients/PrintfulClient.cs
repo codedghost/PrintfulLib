@@ -30,51 +30,6 @@ namespace PrintfulLib.ExternalClients
             _fileLibraryService = new FileLibraryService(apiKey);
         }
 
-        public async Task<GetSyncProductsResponse> GetAllProducts()
-        {
-            var products = await _productService.GetAllProducts();
-
-            return products;
-        }
-
-        public async Task<GetSyncProductsResponse> SearchAllProducts(string searchTerm)
-        {
-            var products = await _productService.SearchAllProducts(searchTerm);
-
-            return products;
-        }
-
-        public async Task<List<GetSyncVariantsResponse>> GetAllProductsWithVariants()
-        {
-            var products = await _productService.GetAllProducts();
-
-            if (products == null)
-                return new List<GetSyncVariantsResponse>();
-
-            var productsWithVariants = await _productService.GetAllVariants(products);
-
-            return productsWithVariants;
-        }
-
-        public async Task<List<GetSyncVariantsResponse>> SearchAllProductsWithVariants(string searchTerm)
-        {
-            var products = await _productService.SearchAllProducts(searchTerm);
-
-            if (products == null)
-                return new List<GetSyncVariantsResponse>();
-
-            var productsWithVariants = await _productService.GetAllVariants(products);
-
-            return productsWithVariants;
-        }
-
-        public async Task<GetSyncVariantsResponse> GetVariantsById(int id)
-        {
-            var getSyncVariantsResponse = await _productService.GetAllVariantsForProduct(id);
-
-            return getSyncVariantsResponse;
-        }
-
         public async Task<GetRequiredTaxStatesResponse> GetRequiredTaxStates()
         {
             var getRequiredTaxStatesResponse = await _taxesService.GetRequiredTaxStates();

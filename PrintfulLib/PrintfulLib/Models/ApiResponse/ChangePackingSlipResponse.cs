@@ -3,14 +3,8 @@ using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Models.ApiResponse
 {
-    public class ChangePackingSlipResponse
+    public class ChangePackingSlipResponse: PrintfulApiResponseBaseModel
     {
-        /// <summary>
-        /// Response status code
-        /// </summary>
-        [JsonProperty("code")]
-        public int ResponseCode { get; set; }
-
         /// <summary>
         /// New Packing Slip Data
         /// </summary>
