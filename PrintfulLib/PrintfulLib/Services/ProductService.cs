@@ -45,7 +45,7 @@ namespace PrintfulLib.Services
             if (request == null)
                 throw new Exception("No data provided to API");
 
-            var idString = GetProductIdOrExternalId(request.ProductId, request.ExternalId);
+            var idString = PrintfulIdHelper.GetIdOrExternalId(request.ProductId, request.ExternalId);
 
             var apiResponse =
                 await _client.GetAsync<GetProductAndVariantsResponse>($"store/products/{idString}");
@@ -70,7 +70,7 @@ namespace PrintfulLib.Services
             if (request == null)
                 throw new Exception("No data provided to API");
 
-            var idString = GetProductIdOrExternalId(request.ProductId, request.ExternalId);
+            var idString = PrintfulIdHelper.GetIdOrExternalId(request.ProductId, request.ExternalId);
 
             var apiResponse = await _client.DeleteAsync<DeleteProductResponse>($"store/products/{idString}");
 
@@ -82,7 +82,7 @@ namespace PrintfulLib.Services
             if (request == null)
                 throw new Exception("No data provided to API");
 
-            var idString = GetProductIdOrExternalId(request.ProductId, request.ExternalId);
+            var idString = PrintfulIdHelper.GetIdOrExternalId(request.ProductId, request.ExternalId);
 
             var apiResponse =
                 await _client.PutAsync<ModifyProductResponse, PutRequestProductBody>($"store/products/{idString}",
@@ -91,14 +91,53 @@ namespace PrintfulLib.Services
             return apiResponse;
         }
 
-        private string GetProductIdOrExternalId(int productId, string externalId)
+        internal async Task<CreateNewSyncVariantResponse> CreateNewSyncVariant(CreateNewSyncVariantRequest request)
         {
-            if (productId == 0 && string.IsNullOrWhiteSpace(externalId))
-                throw new Exception("A ProductID or an ExternalID must be provided");
+            if (request == null) throw new Exception("No data provided to API");
 
-            var idString = productId > 0 ? productId.ToString() : $"@{externalId}";
+            var idString = PrintfulIdHelper.GetIdOrExternalId(request.SyncProductId, request.ExternalId);
 
-            return idString;
+            var apiResponse =
+                await _client.PostAsync<CreateNewSyncVariantResponse, RequestVariant>(
+                    $"store/products/{idString}/variants", request.RequestVariant);
+
+            return apiResponse;
+        }
+
+        internal async Task<GetSyncVariantInformationResponse> GetSyncVariantInfo(
+            GetSyncVariantInformationRequest request)
+        {
+            if (request == null) throw new Exception("No data provided to API");
+
+            var idString = PrintfulIdHelper.GetIdOrExternalId(request.VariantId, request.ExternalId);
+
+            var apiResponse = await _client.GetAsync<GetSyncVariantInformationResponse>($"store/variants/{idString}");
+
+            return apiResponse;
+        }
+
+        internal async Task<DeleteSyncVariantResponse> DeleteSyncVariant(DeleteSyncVariantRequest request)
+        {
+            if (request == null) throw new Exception("No data provided to API");
+
+            var idString = PrintfulIdHelper.GetIdOrExternalId(request.VariantId, request.ExternalId);
+
+            var apiResponse = await _client.DeleteAsync<DeleteSyncVariantResponse>($"/store/variants/{idString}");
+
+            return apiResponse;
+        }
+
+        internal async Task<ModifySyncVariantResponse> ModifySyncVariant(ModifySyncVariantRequest request)
+        {
+            if (request == null) throw new Exception("No data provided to API");
+
+            var idString = PrintfulIdHelper.GetIdOrExternalId(request.VariantId, request.ExternalId);
+
+            var apiResponse =
+                await _client.PutAsync<ModifySyncVariantResponse, PutRequestVariant>($"store/variants/{idString}",
+                    request.PutRequestVariant);
+
+            return apiResponse;
         }
     }
 }

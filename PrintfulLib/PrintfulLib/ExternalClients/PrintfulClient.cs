@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using PrintfulLib.Interfaces.ExternalClients;
 using PrintfulLib.Models.ApiRequest;
 using PrintfulLib.Models.ApiResponse;
+using PrintfulLib.Models.ChildObjects;
 using PrintfulLib.Services;
 
 namespace PrintfulLib.ExternalClients
@@ -17,6 +18,7 @@ namespace PrintfulLib.ExternalClients
         private WarehouseProductsService _warehouseProductsService;
         private WarehouseShipmentsService _warehouseShipmentsService;
         private FileLibraryService _fileLibraryService;
+        private OrderService _orderService;
 
         public PrintfulClient(string apiKey)
         {
@@ -28,6 +30,7 @@ namespace PrintfulLib.ExternalClients
             _warehouseProductsService = new WarehouseProductsService(apiKey);
             _warehouseShipmentsService = new WarehouseShipmentsService(apiKey);
             _fileLibraryService = new FileLibraryService(apiKey);
+            _orderService = new OrderService(apiKey);
         }
 
         public async Task<GetRequiredTaxStatesResponse> GetRequiredTaxStates()
@@ -133,6 +136,118 @@ namespace PrintfulLib.ExternalClients
         public async Task<AddFileResponse> AddFile(AddFileRequest request)
         {
             var result = await _fileLibraryService.AddFile(request);
+
+            return result;
+        }
+
+        public async Task<GetSyncProductsResponse> GetProducts(GetProductsRequest request)
+        {
+            var result = await _productService.GetProducts(request);
+
+            return result;
+        }
+
+        public async Task<GetProductAndVariantsResponse> GetProductAndVariants(GetProductAndVariantsRequest request)
+        {
+            var result = await _productService.GetProductAndVariants(request);
+
+            return result;
+        }
+
+        public async Task<CreateNewProductResponse> CreateProduct(CreateNewProductRequest request)
+        {
+            var result = await _productService.CreateProduct(request);
+
+            return result;
+        }
+
+        public async Task<DeleteProductResponse> DeleteProduct(DeleteProductRequest request)
+        {
+            var result = await _productService.DeleteProduct(request);
+
+            return result;
+        }
+
+        public async Task<ModifyProductResponse> ModifyProduct(ModifyProductRequest request)
+        {
+            var result = await _productService.ModifyProduct(request);
+
+            return result;
+        }
+
+        public async Task<CreateNewSyncVariantResponse> CreateNewSyncVariant(CreateNewSyncVariantRequest request)
+        {
+            var result = await _productService.CreateNewSyncVariant(request);
+
+            return result;
+        }
+
+        public async Task<GetSyncVariantInformationResponse> GetSyncVariantInfo(GetSyncVariantInformationRequest request)
+        {
+            var result = await _productService.GetSyncVariantInfo(request);
+
+            return result;
+        }
+
+        public async Task<DeleteSyncVariantResponse> DeleteSyncVariant(DeleteSyncVariantRequest request)
+        {
+            var result = await _productService.DeleteSyncVariant(request);
+
+            return result;
+        }
+
+        public async Task<ModifySyncVariantResponse> ModifySyncVariant(ModifySyncVariantRequest request)
+        {
+            var result = await _productService.ModifySyncVariant(request);
+
+            return result;
+        }
+
+        public async Task<GetOrdersResponse> GetOrders(GetOrdersRequest request)
+        {
+            var result = await _orderService.GetOrders(request);
+
+            return result;
+        }
+
+        public async Task<CreateNewOrderResponse> CreateOrder(CreateNewOrderRequest request)
+        {
+            var result = await _orderService.CreateOrder(request);
+
+            return result;
+        }
+
+        public async Task<EstimateCostsResponse> EstimateCosts(EstimateCostsRequest request)
+        {
+            var result = await _orderService.EstimateCosts(request);
+
+            return result;
+        }
+
+        public async Task<GetOrderDataResponse> GetOrder(GetOrderDataRequest request)
+        {
+            var result = await _orderService.GetOrder(request);
+
+            return result;
+        }
+
+        public async Task<CancelOrderResponse> CancelOrder(CancelOrderRequest request)
+        {
+            var result = await _orderService.CancelOrder(request);
+
+            return result;
+        }
+
+        public async Task<UpdateOrderDataResponse> UpdateOrderData(UpdateOrderDataRequest request)
+        {
+            var result = await _orderService.UpdateOrderData(request);
+
+            return result;
+        }
+
+        public async Task<ConfirmDraftResponse> ConfirmDraftForFulfillment(ConfirmDraftRequest request)
+        {
+            var result = await _orderService.ConfirmDraftForFulfillment(request);
 
             return result;
         }
