@@ -3,10 +3,8 @@ using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Models.ApiResponse
 {
-    public class GetRequiredTaxStatesResponse
+    public class GetRequiredTaxStatesResponse : PrintfulApiResponseBaseModel
     {
-        [JsonProperty("code")]
-        public int Code { get; set; }
         [JsonProperty("result")]
         public Country[] Result { get; set; }
     }

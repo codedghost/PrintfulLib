@@ -10,7 +10,7 @@ namespace PrintfulLib.Services
 {
     public class WarehouseProductsService
     {
-        private readonly HttpClient _client;
+        private readonly PrintfulHttpClient _client;
 
         public WarehouseProductsService(string apiKey)
         { 
@@ -24,17 +24,9 @@ namespace PrintfulLib.Services
             if (request.Limit > 100)
                 throw new Exception($"Maximum number of items per page is 100");
 
-            var apiResponse = await _client.GetAsync($"warehouse/products?offset={request.Offset}&limit={request.Limit}");
+            var apiResponse = await _client.GetAsync<GetWarehouseProductsResponse>($"warehouse/products?offset={request.Offset}&limit={request.Limit}");
 
-            if (!apiResponse.IsSuccessStatusCode)
-                throw new Exception(
-                    $"Api responded with status code: {apiResponse.StatusCode}. Reason: {apiResponse.ReasonPhrase}");
-
-            var jsonString = await apiResponse.Content.ReadAsStringAsync();
-
-            var data = JsonConvert.DeserializeObject<GetWarehouseProductsResponse>(jsonString);
-
-            return data;
+            return apiResponse;
         }
 
         public async Task<GetWarehouseProductDataResponse> GetWarehouseProductData(
@@ -43,17 +35,11 @@ namespace PrintfulLib.Services
             if (request == null || request.WarehouseProductId == 0)
                 throw new Exception("No data provided to request");
 
-            var apiResponse = await _client.GetAsync($"warehouse/products/{request.WarehouseProductId}");
+            var apiResponse =
+                await _client.GetAsync<GetWarehouseProductDataResponse>(
+                    $"warehouse/products/{request.WarehouseProductId}");
 
-            if (!apiResponse.IsSuccessStatusCode)
-                throw new Exception(
-                    $"Api responded with status code: {apiResponse.StatusCode}. Reason: {apiResponse.ReasonPhrase}");
-
-            var jsonString = await apiResponse.Content.ReadAsStringAsync();
-
-            var data = JsonConvert.DeserializeObject<GetWarehouseProductDataResponse>(jsonString);
-
-            return data;
+            return apiResponse;
         }
 
         public async Task<CreateWarehouseProductResponse> CreateWarehouseProduct(CreateWarehouseProductRequest request)
@@ -62,22 +48,11 @@ namespace PrintfulLib.Services
                 throw new Exception("No data provided to create a Warehouse Product");
 
             if (!request.AcceptTermsAndConditions)
-            {
                 throw new Exception("Terms and Conditions must be accepted");
-            }
 
-            var apiResponse = await _client.PostAsync("warehouse/products", HttpClientHelper.GetJsonData(request));
+            var apiResponse = await _client.PostAsync<CreateWarehouseProductResponse, CreateWarehouseProductRequest>("warehouse/products", request);
 
-            if (!apiResponse.IsSuccessStatusCode)
-                throw new Exception(
-                    $"Api responded with status code: {apiResponse.StatusCode}. Reason: {apiResponse.ReasonPhrase}");
-
-            var jsonString = await apiResponse.Content.ReadAsStringAsync();
-
-            var data = JsonConvert.DeserializeObject<CreateWarehouseProductResponse>(jsonString);
-
-            return data;
-
+            return apiResponse;
         }
     }
 }

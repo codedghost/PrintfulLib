@@ -8,7 +8,7 @@ namespace PrintfulLib.Services
 {
     internal class CountryService
     {
-        private readonly HttpClient _client;
+        private readonly PrintfulHttpClient _client;
 
         internal CountryService(string apiKey)
         {
@@ -17,16 +17,9 @@ namespace PrintfulLib.Services
 
         internal async Task<GetCountryListResponse> GetCountryList()
         {
-            var apiResponse = await _client.GetAsync("countries");
+            var apiResponse = await _client.GetAsync<GetCountryListResponse>("countries");
 
-            if (!apiResponse.IsSuccessStatusCode)
-                return null;
-
-            var jsonString = await apiResponse.Content.ReadAsStringAsync();
-
-            var data = JsonConvert.DeserializeObject<GetCountryListResponse>(jsonString);
-
-            return data;
+            return apiResponse;
         }
     }
 }

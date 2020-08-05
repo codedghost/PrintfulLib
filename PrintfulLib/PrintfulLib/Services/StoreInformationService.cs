@@ -4,12 +4,13 @@ using Newtonsoft.Json;
 using PrintfulLib.Helpers;
 using PrintfulLib.Models.ApiRequest;
 using PrintfulLib.Models.ApiResponse;
+using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Services
 {
     internal class StoreInformationService
     {
-        private readonly HttpClient _client;
+        private readonly PrintfulHttpClient _client;
 
         internal StoreInformationService(string apiKey)
         {
@@ -19,31 +20,18 @@ namespace PrintfulLib.Services
 
         internal async Task<GetStoreInformationResponse> GetStoreInformation()
         {
-            var apiResponse = await _client.GetAsync("store");
+            var apiResponse = await _client.GetAsync<GetStoreInformationResponse>("store");
 
-            if (!apiResponse.IsSuccessStatusCode)
-                return null;
-
-            var jsonString = await apiResponse.Content.ReadAsStringAsync();
-
-            var data = JsonConvert.DeserializeObject<GetStoreInformationResponse>(jsonString);
-
-            return data;
+            return apiResponse;
         }
 
         internal async Task<ChangePackingSlipResponse> ChangePackingSlip(ChangePackingSlipRequest request)
         {
             var apiResponse =
-                await _client.PostAsync("store/packing-slip", HttpClientHelper.GetJsonData(request.PackingSlip));
+                await _client.PostAsync<ChangePackingSlipResponse, PackingSlip>("store/packing-slip", 
+                    request.PackingSlip);
 
-            if (!apiResponse.IsSuccessStatusCode)
-                return null;
-
-            var jsonString = await apiResponse.Content.ReadAsStringAsync();
-
-            var data = JsonConvert.DeserializeObject<ChangePackingSlipResponse>(jsonString);
-
-            return data;
+            return apiResponse;
         }
     }
 }

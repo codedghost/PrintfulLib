@@ -7,11 +7,6 @@ namespace PrintfulLib.Interfaces.ExternalClients
 {
     public interface IPrintfulClient
     {
-        Task<GetSyncProductsResponse> GetAllProducts();
-        Task<GetSyncProductsResponse> SearchAllProducts(string searchTerm);
-        Task<List<GetSyncVariantsResponse>> GetAllProductsWithVariants();
-        Task<List<GetSyncVariantsResponse>> SearchAllProductsWithVariants(string searchTerm);
-        Task<GetSyncVariantsResponse> GetVariantsById(int id);
         Task<GetRequiredTaxStatesResponse> GetRequiredTaxStates();
         Task<CalculateTaxRateResponse> CalculateTaxRate(TaxRequest taxRequest);
         Task<CalculateShippingRatesResponse> CalculateShippingRates(ShippingRequest shippingRequest);
@@ -32,5 +27,23 @@ namespace PrintfulLib.Interfaces.ExternalClients
         Task<GetFilesResponse> GetFiles(GetFilesRequest request);
         Task<GetFileInformationResponse> GetFileInformation(GetFileInformationRequest request);
         Task<AddFileResponse> AddFile(AddFileRequest request);
+        Task<GetSyncProductsResponse> GetProducts(GetProductsRequest request);
+        Task<GetProductAndVariantsResponse> GetProductAndVariants(GetProductAndVariantsRequest request);
+        Task<CreateNewProductResponse> CreateProduct(CreateNewProductRequest request);
+        Task<DeleteProductResponse> DeleteProduct(DeleteProductRequest request);
+        Task<ModifyProductResponse> ModifyProduct(ModifyProductRequest request);
+        Task<CreateNewSyncVariantResponse> CreateNewSyncVariant(CreateNewSyncVariantRequest request);
+        Task<GetSyncVariantInformationResponse> GetSyncVariantInfo(
+            GetSyncVariantInformationRequest request);
+
+        Task<DeleteSyncVariantResponse> DeleteSyncVariant(DeleteSyncVariantRequest request);
+        Task<ModifySyncVariantResponse> ModifySyncVariant(ModifySyncVariantRequest request);
+        Task<GetOrdersResponse> GetOrders(GetOrdersRequest request);
+        Task<CreateNewOrderResponse> CreateOrder(CreateNewOrderRequest request);
+        Task<EstimateCostsResponse> EstimateCosts(EstimateCostsRequest request);
+        Task<GetOrderDataResponse> GetOrder(GetOrderDataRequest request);
+        Task<CancelOrderResponse> CancelOrder(CancelOrderRequest request);
+        Task<UpdateOrderDataResponse> UpdateOrderData(UpdateOrderDataRequest request);
+        Task<ConfirmDraftResponse> ConfirmDraftForFulfillment(ConfirmDraftRequest request);
     }
 }
