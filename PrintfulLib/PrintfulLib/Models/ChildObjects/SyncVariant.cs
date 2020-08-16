@@ -33,5 +33,8 @@ namespace PrintfulLib.Models.ChildObjects
 
         [JsonProperty("files")]
         public File[] Files { get; set; }
+
+        [JsonProperty("options")]
+        public ItemOption[] ItemOptions { get; set; }
     }
 }
