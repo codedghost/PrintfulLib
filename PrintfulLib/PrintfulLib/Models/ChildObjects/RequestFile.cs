@@ -8,7 +8,7 @@ namespace PrintfulLib.Models.ChildObjects
         public string Type { get; set; }
 
         [JsonProperty("id")]
-        public int FileId { get; set; }
+        public int? FileId { get; set; }
 
         [JsonProperty("url")]
         public string FileUrl { get; set; }

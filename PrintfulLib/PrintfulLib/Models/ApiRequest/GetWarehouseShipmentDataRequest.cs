@@ -5,6 +5,6 @@ namespace PrintfulLib.Models.ApiRequest
     public class GetWarehouseShipmentDataRequest
     {
         [JsonProperty("id")]
-        public int WarehouseShipmentId { get; set; }
+        public int? WarehouseShipmentId { get; set; }
     }
 }

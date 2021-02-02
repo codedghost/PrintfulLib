@@ -1,12 +1,13 @@
 ﻿using System;
 using Newtonsoft.Json;
+using PrintfulLib.Converters;
 
 namespace PrintfulLib.Models.ChildObjects
 {
     public class Shipment
     {
         [JsonProperty("id")]
-        public int ShipmentId { get; set; }
+        public int? ShipmentId { get; set; }
 
         [JsonProperty("carrier")]
         public string Carrier { get; set; }
@@ -21,13 +22,14 @@ namespace PrintfulLib.Models.ChildObjects
         public string TrackingUrl { get; set; }
 
         [JsonProperty("created")]
+        [JsonConverter(typeof(TimestampDateTimeConverter))]
         public DateTime ShippingTime { get; set; }
 
         [JsonProperty("ship_date")]
         public string ShipDate { get; set; }
 
         [JsonProperty("shipped_at")]
-        public int ShippingTimeUnixTime { get; set; }
+        public int? ShippingTimeUnixTime { get; set; }
 
         [JsonProperty("reshipment")]
         public bool Reshipment { get; set; }

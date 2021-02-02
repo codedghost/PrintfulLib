@@ -1,4 +1,6 @@
-﻿namespace PrintfulLib.Models.ChildObjects
+﻿using System;
+
+namespace PrintfulLib.Models.ChildObjects
 {
     public enum OrderStatus
     {
@@ -11,5 +13,33 @@
         OnHold = 6,
         Partial = 7,
         Fulfilled = 8
+    }
+
+    public static class OrderStatusExtension
+    {
+        public static string ToString(this OrderStatus status)
+        {
+            switch (status)
+            {
+                case OrderStatus.Draft:
+                    return "Draft";
+                case OrderStatus.Pending:
+                    return "Pending";
+                case OrderStatus.Failed:
+                    return "Failed";
+                case OrderStatus.Cancelled:
+                    return "Cancelled";
+                case OrderStatus.InProcess:
+                    return "In Process";
+                case OrderStatus.OnHold:
+                    return "On Hold";
+                case OrderStatus.Partial:
+                    return "Partial";
+                case OrderStatus.Fulfilled:
+                    return "Fulfilled";
+                default:
+                    return "NO STATUS";
+            }
+        }
     }
 }

@@ -19,10 +19,13 @@ namespace PrintfulLib.Services
 
         public async Task<GetWarehouseProductsResponse> GetWarehouseProducts(GetWarehouseProductsRequest request)
         {
-            if (request == null || request.Limit == 0)
+            if (request == null)
                 throw new Exception("No data provided to request");
             if (request.Limit > 100)
                 throw new Exception($"Maximum number of items per page is 100");
+
+            if (request.Limit == 0)
+                request.Limit = 100;
 
             var apiResponse = await _client.GetAsync<GetWarehouseProductsResponse>($"warehouse/products?offset={request.Offset}&limit={request.Limit}");
 

@@ -1,12 +1,13 @@
 ﻿using System;
 using Newtonsoft.Json;
+using PrintfulLib.Converters;
 
 namespace PrintfulLib.Models.ChildObjects
 {
     public class File
     {
         [JsonProperty("id")]
-        public int FileId { get; set; }
+        public int? FileId { get; set; }
 
         [JsonProperty("type")]
         public string Type { get; set; }
@@ -24,21 +25,22 @@ namespace PrintfulLib.Models.ChildObjects
         public string MimeType { get; set; }
 
         [JsonProperty("size")]
-        public int SizeBytes { get; set; }
+        public int? SizeBytes { get; set; }
 
         [JsonProperty("width")]
-        public int Width { get; set; }
+        public int? Width { get; set; }
 
         [JsonProperty("height")]
-        public int Height { get; set; }
+        public int? Height { get; set; }
 
         [JsonProperty("dpi")]
-        public int Dpi { get; set; }
+        public int? Dpi { get; set; }
 
         [JsonProperty("status")]
         public string ProcessingStatus { get; set; }
 
         [JsonProperty("created")]
+        [JsonConverter(typeof(TimestampDateTimeConverter))]
         public DateTime Created { get; set; }
 
         [JsonProperty("thumbnail_url")]

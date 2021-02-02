@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using PrintfulLib.Converters;
 using PrintfulLib.Helpers;
 
 namespace PrintfulLib.Models.ChildObjects
@@ -7,13 +8,13 @@ namespace PrintfulLib.Models.ChildObjects
     public class Order
     {
         [JsonProperty("id")]
-        public int OrderId { get; set; }
+        public int? OrderId { get; set; }
 
         [JsonProperty("external_id")]
         public string ExternalId { get; set; }
 
         [JsonProperty("store")]
-        public int StoreId { get; set; }
+        public int? StoreId { get; set; }
 
         [JsonProperty("status")]
         private string _status { get; set; }
@@ -23,9 +24,11 @@ namespace PrintfulLib.Models.ChildObjects
         public string ShippingMethod { get; set; }
 
         [JsonProperty("created")]
+        [JsonConverter(typeof(TimestampDateTimeConverter))]
         public DateTime Created { get; set; }
 
         [JsonProperty("updated")]
+        [JsonConverter(typeof(TimestampDateTimeConverter))]
         public DateTime Updated { get; set; }
 
         [JsonProperty("recipient")]

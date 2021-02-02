@@ -5,7 +5,7 @@ namespace PrintfulLib.Models.ChildObjects
     public class WarehouseProductVariant
     {
         [JsonProperty("id")]
-        public int VariantId { get; set; }
+        public int? VariantId { get; set; }
 
         [JsonProperty("name")] 
         public string VariantName { get; set; }
@@ -20,7 +20,7 @@ namespace PrintfulLib.Models.ChildObjects
         public float RetailPrice { get; set; }
 
         [JsonProperty("quantity")]
-        public int QuantityInStock { get; set; }
+        public int? QuantityInStock { get; set; }
 
         [JsonProperty("length")]
         public float Length { get; set; }

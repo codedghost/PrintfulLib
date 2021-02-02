@@ -9,5 +9,8 @@ namespace PrintfulLib.Models.ChildObjects
 
         [JsonProperty("rate")]
         public float Rate { get; set; }
+        
+        [JsonProperty("shipping_taxable")]
+        public bool IsShippingTaxable { get; set; }
     }
 }

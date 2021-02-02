@@ -19,7 +19,7 @@ namespace PrintfulLib.Models.ChildObjects
 
         [JsonProperty("quantity")]
         [JsonRequired]
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; }
 
         [JsonProperty("value")]
         public string ItemValue { get; set; }
