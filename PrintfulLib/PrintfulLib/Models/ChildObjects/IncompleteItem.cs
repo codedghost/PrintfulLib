@@ -8,10 +8,10 @@ namespace PrintfulLib.Models.ChildObjects
         public string ItemName { get; set; }
 
         [JsonProperty("quantity")]
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; }
 
         [JsonProperty("sync_variant_id")]
-        public int SyncVariantId { get; set; }
+        public int? SyncVariantId { get; set; }
 
         [JsonProperty("external_variant_id")]
         public string ExternalVariantId { get; set; }

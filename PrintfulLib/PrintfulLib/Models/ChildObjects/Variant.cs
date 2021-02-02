@@ -5,10 +5,10 @@ namespace PrintfulLib.Models.ChildObjects
     public class Variant
     {
         [JsonProperty("id")]
-        public int VariantId { get; set; }
+        public int? VariantId { get; set; }
 
         [JsonProperty("product_id")]
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
 
         [JsonProperty("name")]
         public string DisplayName { get; set; }

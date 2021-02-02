@@ -74,6 +74,6 @@ namespace PrintfulLib.Models.ChildObjects
         /// Email address
         /// </summary>
         [JsonProperty("email")]
-        public string email { get; set; }
+        public string Email { get; set; }
     }
 }

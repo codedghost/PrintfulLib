@@ -5,7 +5,7 @@ namespace PrintfulLib.Models.ChildObjects
     public class Product
     {
         [JsonProperty("id")]
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
 
         [JsonProperty("type")]
         public string ProductType { get; set; }
@@ -23,7 +23,7 @@ namespace PrintfulLib.Models.ChildObjects
         public string ImageUrl { get; set; }
 
         [JsonProperty("variant_count")]
-        public int VariantTotal { get; set; }
+        public int? VariantTotal { get; set; }
 
         [JsonProperty("currency")]
         public string Currency { get; set; }

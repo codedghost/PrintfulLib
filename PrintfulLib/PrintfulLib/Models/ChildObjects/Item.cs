@@ -5,25 +5,25 @@ namespace PrintfulLib.Models.ChildObjects
     public class Item
     {
         [JsonProperty("id")]
-        public int LineItemId { get; set; }
+        public int? LineItemId { get; set; }
 
         [JsonProperty("external_id")]
         public string ExternalId { get; set; }
 
         [JsonProperty("variant_id")]
-        public int VariantId { get; set; }
+        public int? VariantId { get; set; }
 
         [JsonProperty("sync_variant_id")]
-        public int SyncVariantId { get; set; }
+        public int? SyncVariantId { get; set; }
 
         [JsonProperty("external_variant_id")]
         public string ExternalVariantId { get; set; }
 
         [JsonProperty("warehouse_product_variant_id")]
-        public int WarehouseProductVariantId { get; set; }
+        public int? WarehouseProductVariantId { get; set; }
 
         [JsonProperty("quantity")]
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; }
 
         [JsonProperty("price")]
         public string Price { get; set; }

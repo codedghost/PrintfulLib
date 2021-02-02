@@ -5,7 +5,7 @@ namespace PrintfulLib.Models.ChildObjects
     public class RequestProductResponse
     {
         [JsonProperty("id")]
-        public int SyncProductId { get; set; }
+        public int? SyncProductId { get; set; }
 
         [JsonProperty("external_id")]
         public string ExternalSyncProductId { get; set; }
@@ -14,9 +14,9 @@ namespace PrintfulLib.Models.ChildObjects
         public string ProductName { get; set; }
 
         [JsonProperty("variants")]
-        public int TotalVariants { get; set; }
+        public int? TotalVariants { get; set; }
 
         [JsonProperty("synced")]
-        public int TotalSynced { get; set; }
+        public int? TotalSynced { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace PrintfulLib.Models.ChildObjects
         public string ExternalId { get; set; }
 
         [JsonProperty("variant_id")]
-        public int PrintfulVariantId { get; set; }
+        public int? PrintfulVariantId { get; set; }
 
         [JsonProperty("retail_price")]
         public float RetailPrice { get; set; }

@@ -5,13 +5,13 @@ namespace PrintfulLib.Models.ChildObjects
     public class SyncVariant
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [JsonProperty("external_id")]
         public string ExternalId { get; set; }
 
         [JsonProperty("sync_product_id")]
-        public int SyncProductId { get; set; }
+        public int? SyncProductId { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -20,7 +20,7 @@ namespace PrintfulLib.Models.ChildObjects
         public bool Synced { get; set; }
 
         [JsonProperty("variant_id")]
-        public int VariantId { get; set; }
+        public int? VariantId { get; set; }
 
         [JsonProperty("retail_price")]
         public string RetailPrice { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using PrintfulLib.Converters;
 
 namespace PrintfulLib.Models.ChildObjects
 {
@@ -9,7 +10,7 @@ namespace PrintfulLib.Models.ChildObjects
         /// Store ID
         /// </summary>
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         /// <summary>
         /// Store name
@@ -63,6 +64,7 @@ namespace PrintfulLib.Models.ChildObjects
         /// Store creation timestamp
         /// </summary>
         [JsonProperty("created")]
+        [JsonConverter(typeof(TimestampDateTimeConverter))]
         public DateTime StoreCreatedDateTime { get; set; }
     }
 }
