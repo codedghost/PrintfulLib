@@ -10,15 +10,16 @@ namespace PrintfulLib.ExternalClients
 {
     public class PrintfulClient : IPrintfulClient
     {
-        private ProductService _productService;
-        private CountryService _countryService;
-        private ShippingService _shippingService;
-        private TaxesService _taxesService;
-        private StoreInformationService _storeInformationService;
-        private WarehouseProductsService _warehouseProductsService;
-        private WarehouseShipmentsService _warehouseShipmentsService;
-        private FileLibraryService _fileLibraryService;
-        private OrderService _orderService;
+        private readonly ProductService _productService;
+        private readonly CountryService _countryService;
+        private readonly ShippingService _shippingService;
+        private readonly TaxesService _taxesService;
+        private readonly StoreInformationService _storeInformationService;
+        private readonly WarehouseProductsService _warehouseProductsService;
+        private readonly WarehouseShipmentsService _warehouseShipmentsService;
+        private readonly FileLibraryService _fileLibraryService;
+        private readonly OrderService _orderService;
+        private readonly WebhookSetupService _webhookSetupService;
 
         public PrintfulClient(string apiKey)
         {
@@ -31,6 +32,7 @@ namespace PrintfulLib.ExternalClients
             _warehouseShipmentsService = new WarehouseShipmentsService(apiKey);
             _fileLibraryService = new FileLibraryService(apiKey);
             _orderService = new OrderService(apiKey);
+            _webhookSetupService = new WebhookSetupService(apiKey);
         }
 
         public async Task<GetRequiredTaxStatesResponse> GetRequiredTaxStates()
@@ -248,6 +250,27 @@ namespace PrintfulLib.ExternalClients
         public async Task<ConfirmDraftResponse> ConfirmDraftForFulfillment(ConfirmDraftRequest request)
         {
             var result = await _orderService.ConfirmDraftForFulfillment(request);
+
+            return result;
+        }
+
+        public async Task<WebhookConfigurationResponse> GetWebhookConfiguration()
+        {
+            var result = await _webhookSetupService.Get();
+
+            return result;
+        }
+
+        public async Task<WebhookConfigurationResponse> SetWebhookConfiguration(SetUpWebhookConfigurationRequest request)
+        {
+            var result = await _webhookSetupService.SetUp(request);
+
+            return result;
+        }
+
+        public async Task<WebhookConfigurationResponse> DisableWebhookConfiguration()
+        {
+            var result = await _webhookSetupService.Disable();
 
             return result;
         }

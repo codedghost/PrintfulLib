@@ -45,5 +45,8 @@ namespace PrintfulLib.Interfaces.ExternalClients
         Task<CancelOrderResponse> CancelOrder(CancelOrderRequest request);
         Task<UpdateOrderDataResponse> UpdateOrderData(UpdateOrderDataRequest request);
         Task<ConfirmDraftResponse> ConfirmDraftForFulfillment(ConfirmDraftRequest request);
+        Task<WebhookConfigurationResponse> GetWebhookConfiguration();
+        Task<WebhookConfigurationResponse> SetWebhookConfiguration(SetUpWebhookConfigurationRequest request);
+        Task<WebhookConfigurationResponse> DisableWebhookConfiguration();
     }
 }
