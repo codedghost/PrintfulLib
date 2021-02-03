@@ -8,16 +8,13 @@ using PrintfulLib.Models.ApiResponse;
 
 namespace PrintfulLib.Services
 {
-    public class WarehouseShipmentsService
+    internal class WarehouseShipmentsService : PrintfulServiceBase
     {
-        private PrintfulHttpClient _client;
-
-        public WarehouseShipmentsService(string apiKey)
+        internal WarehouseShipmentsService(string apiKey) : base(apiKey)
         {
-            _client = HttpClientHelper.GetPrintfulClient(apiKey);
         }
 
-        public async Task<GetWarehouseShipmentsResponse> GetWarehouseShipments(GetWarehouseShipmentsRequest request)
+        internal async Task<GetWarehouseShipmentsResponse> GetWarehouseShipments(GetWarehouseShipmentsRequest request)
         {
             if (request == null || request.Limit == 0)
                 throw new Exception("No data provided to request");
@@ -35,7 +32,7 @@ namespace PrintfulLib.Services
             return apiResponse;
         }
 
-        public async Task<GetWarehouseShipmentDataResponse> GetWarehouseShipmentData(
+        internal async Task<GetWarehouseShipmentDataResponse> GetWarehouseShipmentData(
             GetWarehouseShipmentDataRequest request)
         {
             if (request == null || request.WarehouseShipmentId == 0)
@@ -46,7 +43,7 @@ namespace PrintfulLib.Services
             return apiResponse;
         }
 
-        public async Task<CreateWarehouseShipmentResponse> CreateWarehouseShipment(
+        internal async Task<CreateWarehouseShipmentResponse> CreateWarehouseShipment(
             CreateWarehouseShipmentRequest request)
         {
             if (request == null || request.ShipmentId == 0)

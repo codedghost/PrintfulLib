@@ -7,13 +7,10 @@ using PrintfulLib.Models.ApiResponse;
 
 namespace PrintfulLib.Services
 {
-    internal class TaxesService
+    internal class TaxesService : PrintfulServiceBase
     {
-        private readonly PrintfulHttpClient _client;
-
-        internal TaxesService(string apiKey)
+        internal TaxesService(string apiKey) : base(apiKey)
         {
-            _client = HttpClientHelper.GetPrintfulClient(apiKey);
         }
 
         internal async Task<GetRequiredTaxStatesResponse> GetRequiredTaxStates()
@@ -23,7 +20,7 @@ namespace PrintfulLib.Services
             return apiResponse;
         }
 
-        public async Task<CalculateTaxRateResponse> CalculateTaxRate(TaxRequest taxRequest)
+        internal async Task<CalculateTaxRateResponse> CalculateTaxRate(TaxRequest taxRequest)
         {
             var apiResponse = await _client.PostAsync<CalculateTaxRateResponse, TaxRequest>("tax/rates", taxRequest);
 

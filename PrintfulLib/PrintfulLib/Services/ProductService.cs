@@ -12,13 +12,10 @@ using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Services
 {
-    internal class ProductService
+    internal class ProductService : PrintfulServiceBase
     {
-        private readonly PrintfulHttpClient _client;
-
-        internal ProductService(string apiKey)
+        internal ProductService(string apiKey) : base(apiKey)
         {
-            _client = HttpClientHelper.GetPrintfulClient(apiKey);
         }
 
         internal async Task<GetSyncProductsResponse> GetProducts(GetProductsRequest request)

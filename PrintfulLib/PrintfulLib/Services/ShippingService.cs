@@ -7,13 +7,10 @@ using PrintfulLib.Models.ApiResponse;
 
 namespace PrintfulLib.Services
 {
-    internal class ShippingService
+    internal class ShippingService : PrintfulServiceBase
     {
-        private PrintfulHttpClient _client;
-
-        internal ShippingService(string apiKey)
+        internal ShippingService(string apiKey) : base(apiKey)
         {
-            _client = HttpClientHelper.GetPrintfulClient(apiKey);
         }
 
         internal async Task<CalculateShippingRatesResponse> CalculateShippingRates(ShippingRequest request)

@@ -8,13 +8,10 @@ using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Services
 {
-    internal class StoreInformationService
+    internal class StoreInformationService : PrintfulServiceBase
     {
-        private readonly PrintfulHttpClient _client;
-
-        internal StoreInformationService(string apiKey)
+        internal StoreInformationService(string apiKey) : base(apiKey)
         {
-            _client = HttpClientHelper.GetPrintfulClient(apiKey);
         }
 
 

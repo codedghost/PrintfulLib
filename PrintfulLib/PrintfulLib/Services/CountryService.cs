@@ -6,13 +6,10 @@ using PrintfulLib.Models.ApiResponse;
 
 namespace PrintfulLib.Services
 {
-    internal class CountryService
+    internal class CountryService : PrintfulServiceBase
     {
-        private readonly PrintfulHttpClient _client;
-
-        internal CountryService(string apiKey)
+        internal CountryService(string apiKey) : base(apiKey)
         {
-            _client = HttpClientHelper.GetPrintfulClient(apiKey);
         }
 
         internal async Task<GetCountryListResponse> GetCountryList()
