@@ -8,16 +8,13 @@ using PrintfulLib.Models.ApiResponse;
 
 namespace PrintfulLib.Services
 {
-    public class WarehouseProductsService
+    internal class WarehouseProductsService : PrintfulServiceBase
     {
-        private readonly PrintfulHttpClient _client;
-
-        public WarehouseProductsService(string apiKey)
+        internal WarehouseProductsService(string apiKey) : base(apiKey)
         { 
-            _client = HttpClientHelper.GetPrintfulClient(apiKey);
         }
 
-        public async Task<GetWarehouseProductsResponse> GetWarehouseProducts(GetWarehouseProductsRequest request)
+        internal async Task<GetWarehouseProductsResponse> GetWarehouseProducts(GetWarehouseProductsRequest request)
         {
             if (request == null)
                 throw new Exception("No data provided to request");
@@ -32,7 +29,7 @@ namespace PrintfulLib.Services
             return apiResponse;
         }
 
-        public async Task<GetWarehouseProductDataResponse> GetWarehouseProductData(
+        internal async Task<GetWarehouseProductDataResponse> GetWarehouseProductData(
             GetWarehouseProductDataRequest request)
         {
             if (request == null || request.WarehouseProductId == 0)
@@ -45,7 +42,7 @@ namespace PrintfulLib.Services
             return apiResponse;
         }
 
-        public async Task<CreateWarehouseProductResponse> CreateWarehouseProduct(CreateWarehouseProductRequest request)
+        internal async Task<CreateWarehouseProductResponse> CreateWarehouseProduct(CreateWarehouseProductRequest request)
         {
             if (request?.WarehouseProduct == null)
                 throw new Exception("No data provided to create a Warehouse Product");

@@ -7,14 +7,10 @@ using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Services
 {
-    internal class OrderService
+    internal class OrderService : PrintfulServiceBase
     {
-
-        private readonly PrintfulHttpClient _client;
-
-        internal OrderService(string apiKey)
+        internal OrderService(string apiKey) : base(apiKey)
         {
-            _client = HttpClientHelper.GetPrintfulClient(apiKey);
         }
 
         internal async Task<GetOrdersResponse> GetOrders(GetOrdersRequest request)

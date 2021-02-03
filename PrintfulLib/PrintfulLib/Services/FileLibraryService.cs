@@ -9,16 +9,13 @@ using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Services
 {
-    public class FileLibraryService
+    internal class FileLibraryService : PrintfulServiceBase
     {
-        private PrintfulHttpClient _client;
-
-        public FileLibraryService(string apiKey)
+        internal FileLibraryService(string apiKey) : base(apiKey)
         {
-            _client = HttpClientHelper.GetPrintfulClient(apiKey);
         }
 
-        public async Task<GetFilesResponse> GetFiles(GetFilesRequest request)
+        internal async Task<GetFilesResponse> GetFiles(GetFilesRequest request)
         {
             if (request == null)
                 throw new Exception("No data provided to request");
@@ -37,7 +34,7 @@ namespace PrintfulLib.Services
             return apiResponse;
         }
 
-        public async Task<GetFileInformationResponse> GetFileInformation(GetFileInformationRequest request)
+        internal async Task<GetFileInformationResponse> GetFileInformation(GetFileInformationRequest request)
         {
             if (request == null || request.FileId == 0)
                 throw new Exception("No data provided to request");
@@ -47,7 +44,7 @@ namespace PrintfulLib.Services
             return apiResponse;
         }
 
-        public async Task<AddFileResponse> AddFile(AddFileRequest request)
+        internal async Task<AddFileResponse> AddFile(AddFileRequest request)
         {
             if (string.IsNullOrWhiteSpace(request?.File?.Url))
                 throw new Exception("No data provided to request");
