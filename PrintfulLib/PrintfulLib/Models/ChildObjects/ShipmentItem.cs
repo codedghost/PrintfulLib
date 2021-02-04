@@ -9,5 +9,14 @@ namespace PrintfulLib.Models.ChildObjects
 
         [JsonProperty("quantity")]
         public int? Quantity { get; set; }
+
+        [JsonProperty("picked")] 
+        public int? Picked { get; set; }
+
+        [JsonProperty("printed")]
+        public int? Printed { get; set; }
+
+        [JsonProperty("is_started")]
+        public bool IsStarted { get; set; }
     }
 }

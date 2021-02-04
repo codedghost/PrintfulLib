@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using PrintfulLib.Converters;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace PrintfulLib.Models.WebhookResponses
 {
@@ -43,32 +43,33 @@ namespace PrintfulLib.Models.WebhookResponses
         public int StoreId { get; set; }
 
         [JsonProperty("data")]
-        public dynamic WebhookDataObject { get; set; }
+        public object WebhookDataObject { get; set; }
 
         [JsonIgnore]
-        public IWebhookDataObject WebhookData {
+        public IWebhookDataObject WebhookData
+        {
             get
             {
                 switch (EventType)
                 {
                     case WebhookEventType.PackageShipped:
-                        return (ShipmentInfo) WebhookDataObject;
+                        return JsonConvert.DeserializeObject<ShipmentInfo>(JsonConvert.SerializeObject(WebhookDataObject));
                     case WebhookEventType.PackageReturned:
-                        return (ReturnInfo) WebhookDataObject;
+                        return JsonConvert.DeserializeObject<ReturnInfo>(JsonConvert.SerializeObject(WebhookDataObject));
                     case WebhookEventType.OrderFailed:
-                        return (OrderStatusChange) WebhookDataObject;
+                        return JsonConvert.DeserializeObject<OrderStatusChange>(JsonConvert.SerializeObject(WebhookDataObject));
                     case WebhookEventType.OrderCancelled:
-                        return (OrderStatusChange) WebhookDataObject;
+                        return JsonConvert.DeserializeObject<OrderStatusChange>(JsonConvert.SerializeObject(WebhookDataObject));
                     case WebhookEventType.ProductSynced:
-                        return (SyncInfo) WebhookDataObject;
+                        return JsonConvert.DeserializeObject<SyncInfo>(JsonConvert.SerializeObject(WebhookDataObject));
                     case WebhookEventType.ProductUpdated:
-                        return (SyncInfo) WebhookDataObject;
+                        return JsonConvert.DeserializeObject<SyncInfo>(JsonConvert.SerializeObject(WebhookDataObject));
                     case WebhookEventType.StockUpdated:
-                        return (ProductStock) WebhookDataObject;
+                        return JsonConvert.DeserializeObject<ProductStock>(JsonConvert.SerializeObject(WebhookDataObject));
                     case WebhookEventType.OrderPutOnHold:
-                        return (OrderStatusChange) WebhookDataObject;
+                        return JsonConvert.DeserializeObject<OrderStatusChange>(JsonConvert.SerializeObject(WebhookDataObject));
                     case WebhookEventType.OrderRemoveHold:
-                        return (OrderStatusChange)WebhookDataObject;
+                        return JsonConvert.DeserializeObject<OrderStatusChange>(JsonConvert.SerializeObject(WebhookDataObject));
                     case WebhookEventType.NotBound:
                         return null;
                     default:
