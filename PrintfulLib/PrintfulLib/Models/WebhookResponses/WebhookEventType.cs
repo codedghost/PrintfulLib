@@ -20,7 +20,7 @@ namespace PrintfulLib.Models.WebhookResponses
 
     public static class WebhookEventTypeExtensions
     {
-        public static string ToString(this WebhookEventType type)
+        public static string ToWebhookTypeString(this WebhookEventType type)
         {
             switch (type)
             {

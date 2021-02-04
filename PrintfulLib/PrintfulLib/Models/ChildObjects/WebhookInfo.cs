@@ -9,6 +9,7 @@ namespace PrintfulLib.Models.ChildObjects
         [JsonProperty("url")]
         public string WebhookReturnUrl { get; set; }
 
+        [JsonIgnore]
         public List<string> EnabledWebhookEvents
         {
             get => EventTypes.ToList();
