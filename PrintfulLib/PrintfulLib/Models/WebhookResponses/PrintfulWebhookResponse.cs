@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using PrintfulLib.Converters;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace PrintfulLib.Models.WebhookResponses
 {
@@ -42,6 +43,38 @@ namespace PrintfulLib.Models.WebhookResponses
         public int StoreId { get; set; }
 
         [JsonProperty("data")]
-        public IWebhookDataObject WebhookData { get; set; }
+        public string WebhookData { get; set; }
+
+        [JsonIgnore]
+        public IWebhookDataObject WebhookDataObject {
+            get
+            {
+                switch (EventType)
+                {
+                    case WebhookEventType.PackageShipped:
+                        return JsonSerializer.Deserialize<ShipmentInfo>(WebhookData);
+                    case WebhookEventType.PackageReturned:
+                        return JsonSerializer.Deserialize<ReturnInfo>(WebhookData);
+                    case WebhookEventType.OrderFailed:
+                        return JsonSerializer.Deserialize<OrderStatusChange>(WebhookData);
+                    case WebhookEventType.OrderCancelled:
+                        return JsonSerializer.Deserialize<OrderStatusChange>(WebhookData);
+                    case WebhookEventType.ProductSynced:
+                        return JsonSerializer.Deserialize<SyncInfo>(WebhookData);
+                    case WebhookEventType.ProductUpdated:
+                        return JsonSerializer.Deserialize<SyncInfo>(WebhookData);
+                    case WebhookEventType.StockUpdated:
+                        return JsonSerializer.Deserialize<ProductStock>(WebhookData);
+                    case WebhookEventType.OrderPutOnHold:
+                        return JsonSerializer.Deserialize<OrderStatusChange>(WebhookData);
+                    case WebhookEventType.OrderRemoveHold:
+                        return JsonSerializer.Deserialize<OrderStatusChange>(WebhookData);
+                    case WebhookEventType.NotBound:
+                        return null;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
     }
 }
