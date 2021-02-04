@@ -43,7 +43,7 @@ namespace PrintfulLib.Models.WebhookResponses
         public int StoreId { get; set; }
 
         [JsonProperty("data")]
-        public object WebhookDataObject { get; set; }
+        public dynamic WebhookDataObject { get; set; }
 
         [JsonIgnore]
         public IWebhookDataObject WebhookData {
@@ -52,23 +52,23 @@ namespace PrintfulLib.Models.WebhookResponses
                 switch (EventType)
                 {
                     case WebhookEventType.PackageShipped:
-                        return JsonSerializer.Deserialize<ShipmentInfo>(JsonSerializer.Serialize(WebhookDataObject));
+                        return (ShipmentInfo) WebhookDataObject;
                     case WebhookEventType.PackageReturned:
-                        return JsonSerializer.Deserialize<ReturnInfo>(JsonSerializer.Serialize(WebhookDataObject));
+                        return (ReturnInfo) WebhookDataObject;
                     case WebhookEventType.OrderFailed:
-                        return JsonSerializer.Deserialize<OrderStatusChange>(JsonSerializer.Serialize(WebhookDataObject));
+                        return (OrderStatusChange) WebhookDataObject;
                     case WebhookEventType.OrderCancelled:
-                        return JsonSerializer.Deserialize<OrderStatusChange>(JsonSerializer.Serialize(WebhookDataObject));
+                        return (OrderStatusChange) WebhookDataObject;
                     case WebhookEventType.ProductSynced:
-                        return JsonSerializer.Deserialize<SyncInfo>(JsonSerializer.Serialize(WebhookDataObject));
+                        return (SyncInfo) WebhookDataObject;
                     case WebhookEventType.ProductUpdated:
-                        return JsonSerializer.Deserialize<SyncInfo>(JsonSerializer.Serialize(WebhookDataObject));
+                        return (SyncInfo) WebhookDataObject;
                     case WebhookEventType.StockUpdated:
-                        return JsonSerializer.Deserialize<ProductStock>(JsonSerializer.Serialize(WebhookDataObject));
+                        return (ProductStock) WebhookDataObject;
                     case WebhookEventType.OrderPutOnHold:
-                        return JsonSerializer.Deserialize<OrderStatusChange>(JsonSerializer.Serialize(WebhookDataObject));
+                        return (OrderStatusChange) WebhookDataObject;
                     case WebhookEventType.OrderRemoveHold:
-                        return JsonSerializer.Deserialize<OrderStatusChange>(JsonSerializer.Serialize(WebhookDataObject));
+                        return (OrderStatusChange)WebhookDataObject;
                     case WebhookEventType.NotBound:
                         return null;
                     default:
