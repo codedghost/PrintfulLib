@@ -2,7 +2,7 @@
 
 namespace PrintfulLib.Models.WebhookResponses
 {
-    public class ProductStock
+    public class ProductStock : IWebhookDataObject
     {
         [JsonProperty("product_id")]
         public int ProductId { get; set; }

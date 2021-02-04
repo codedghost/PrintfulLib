@@ -3,7 +3,7 @@ using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Models.WebhookResponses
 {
-    public class ReturnInfo
+    public class ReturnInfo : IWebhookDataObject
     {
         [JsonProperty("reason")]
         public string CustomerReturnReason { get; set; }
