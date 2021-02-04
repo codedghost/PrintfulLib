@@ -6,24 +6,25 @@ namespace PrintfulLib.Models.WebhookResponses
 {
     public class PrintfulWebhookResponse
     {
+        [JsonIgnore]
         public WebhookEventType EventType
         {
             get
             {
-                if (Type == WebhookEventType.PackageShipped.ToString()) return WebhookEventType.PackageShipped;
-                if (Type == WebhookEventType.PackageReturned.ToString()) return WebhookEventType.PackageReturned;
-                if (Type == WebhookEventType.OrderFailed.ToString()) return WebhookEventType.OrderFailed;
-                if (Type == WebhookEventType.OrderCancelled.ToString()) return WebhookEventType.OrderCancelled;
-                if (Type == WebhookEventType.ProductSynced.ToString()) return WebhookEventType.ProductSynced;
-                if (Type == WebhookEventType.ProductUpdated.ToString()) return WebhookEventType.ProductUpdated;
-                if (Type == WebhookEventType.StockUpdated.ToString()) return WebhookEventType.StockUpdated;
-                if (Type == WebhookEventType.OrderPutOnHold.ToString()) return WebhookEventType.OrderRemoveHold; 
+                if (Type == WebhookEventType.PackageShipped.ToWebhookTypeString()) return WebhookEventType.PackageShipped;
+                if (Type == WebhookEventType.PackageReturned.ToWebhookTypeString()) return WebhookEventType.PackageReturned;
+                if (Type == WebhookEventType.OrderFailed.ToWebhookTypeString()) return WebhookEventType.OrderFailed;
+                if (Type == WebhookEventType.OrderCancelled.ToWebhookTypeString()) return WebhookEventType.OrderCancelled;
+                if (Type == WebhookEventType.ProductSynced.ToWebhookTypeString()) return WebhookEventType.ProductSynced;
+                if (Type == WebhookEventType.ProductUpdated.ToWebhookTypeString()) return WebhookEventType.ProductUpdated;
+                if (Type == WebhookEventType.StockUpdated.ToWebhookTypeString()) return WebhookEventType.StockUpdated;
+                if (Type == WebhookEventType.OrderPutOnHold.ToWebhookTypeString()) return WebhookEventType.OrderRemoveHold; 
                 
                 return WebhookEventType.NotBound;
             }
             set
             {
-                Type = value.ToString();
+                Type = value.ToWebhookTypeString();
             }
         }
 
