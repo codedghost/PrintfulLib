@@ -20,6 +20,6 @@ namespace PrintfulLib.Models.ChildObjects
         private string[] EventTypes { get; set; }
 
         [JsonProperty("params")]
-        public object[] OptionalParams { get; set; }
+        public object OptionalParams { get; set; }
     }
 }
