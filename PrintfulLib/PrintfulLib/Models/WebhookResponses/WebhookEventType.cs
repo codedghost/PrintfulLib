@@ -31,7 +31,7 @@ namespace PrintfulLib.Models.WebhookResponses
                 case WebhookEventType.OrderFailed:
                     return "order_failed";
                 case WebhookEventType.OrderCancelled:
-                    return "order_cancelled";
+                    return "order_canceled";
                 case WebhookEventType.ProductSynced:
                     return "product_synced";
                 case WebhookEventType.ProductUpdated:
