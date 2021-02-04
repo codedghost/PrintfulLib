@@ -43,10 +43,10 @@ namespace PrintfulLib.Models.WebhookResponses
         public int StoreId { get; set; }
 
         [JsonProperty("data")]
-        public object WebhookData { get; set; }
+        public object WebhookDataObject { get; set; }
 
         [JsonIgnore]
-        public IWebhookDataObject WebhookDataObject {
+        public IWebhookDataObject WebhookData {
             get
             {
                 switch (EventType)
