@@ -19,8 +19,9 @@ namespace PrintfulLib.Models.WebhookResponses
                 if (Type == WebhookEventType.ProductSynced.ToWebhookTypeString()) return WebhookEventType.ProductSynced;
                 if (Type == WebhookEventType.ProductUpdated.ToWebhookTypeString()) return WebhookEventType.ProductUpdated;
                 if (Type == WebhookEventType.StockUpdated.ToWebhookTypeString()) return WebhookEventType.StockUpdated;
-                if (Type == WebhookEventType.OrderPutOnHold.ToWebhookTypeString()) return WebhookEventType.OrderRemoveHold; 
-                
+                if (Type == WebhookEventType.OrderPutOnHold.ToWebhookTypeString()) return WebhookEventType.OrderPutOnHold;
+                if (Type == WebhookEventType.OrderRemoveHold.ToWebhookTypeString()) return WebhookEventType.OrderRemoveHold;
+
                 return WebhookEventType.NotBound;
             }
             set
