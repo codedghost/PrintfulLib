@@ -2,7 +2,9 @@
 using System.Threading.Tasks;
 using PrintfulLib.Helpers;
 using PrintfulLib.Models.ApiRequest;
-using PrintfulLib.Models.ApiResponse;
+using PrintfulLib.Models.ApiRequest.Order;
+using PrintfulLib.Models.ApiRequest.Product;
+using PrintfulLib.Models.ApiResponse.Order;
 using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Services

@@ -1,8 +1,5 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using PrintfulLib.Helpers;
-using PrintfulLib.Models.ApiResponse;
+﻿using System.Threading.Tasks;
+using PrintfulLib.Models.ApiResponse.Country;
 
 namespace PrintfulLib.Services
 {

@@ -1,9 +1,6 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using PrintfulLib.Helpers;
-using PrintfulLib.Models.ApiRequest;
-using PrintfulLib.Models.ApiResponse;
+﻿using System.Threading.Tasks;
+using PrintfulLib.Models.ApiRequest.Shipping;
+using PrintfulLib.Models.ApiResponse.Shipping;
 
 namespace PrintfulLib.Services
 {

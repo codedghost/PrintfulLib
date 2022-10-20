@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using PrintfulLib.Helpers;
 using PrintfulLib.Models.ApiRequest;
-using PrintfulLib.Models.ApiResponse;
+using PrintfulLib.Models.ApiRequest.Product;
+using PrintfulLib.Models.ApiResponse.Product;
 using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Services
@@ -32,7 +29,7 @@ namespace PrintfulLib.Services
                 : $"&search={request.SearchTerms}";
 
             var apiResponse = await _client.GetAsync<GetSyncProductsResponse>(
-                $"store/products?limit={request.Limit}&offset={request.Offset}{statusString}{searchString}");
+                $"store/products?category_id={request.CategoryId}&limit={request.Limit}&offset={request.Offset}{statusString}{searchString}");
 
             return apiResponse;
         }

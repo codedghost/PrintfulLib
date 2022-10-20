@@ -8,4 +8,10 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\ApiRequest\Catalog\" />
+    <Folder Include="Models\ApiRequest\Country\" />
+    <Folder Include="Models\ApiResponse\Catalog\" />
+  </ItemGroup>
+
 </Project>

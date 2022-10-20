@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
-using PrintfulLib.Helpers;
-using PrintfulLib.Models.ApiRequest;
-using PrintfulLib.Models.ApiResponse;
+using PrintfulLib.Models.ApiRequest.WebhookSetup;
+using PrintfulLib.Models.ApiResponse.WebhookSetup;
 
 namespace PrintfulLib.Services
 {

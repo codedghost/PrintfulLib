@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using PrintfulLib.Converters;
 
 namespace PrintfulLib.Models.WebhookResponses

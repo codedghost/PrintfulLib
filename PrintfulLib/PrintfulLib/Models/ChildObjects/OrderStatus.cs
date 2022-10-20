@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PrintfulLib.Models.ChildObjects
+﻿namespace PrintfulLib.Models.ChildObjects
 {
     public enum OrderStatus
     {

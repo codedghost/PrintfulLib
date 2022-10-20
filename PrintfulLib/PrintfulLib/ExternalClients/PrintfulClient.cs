@@ -1,9 +1,26 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using PrintfulLib.Interfaces.ExternalClients;
 using PrintfulLib.Models.ApiRequest;
-using PrintfulLib.Models.ApiResponse;
-using PrintfulLib.Models.ChildObjects;
+using PrintfulLib.Models.ApiRequest.FileLibrary;
+using PrintfulLib.Models.ApiRequest.Order;
+using PrintfulLib.Models.ApiRequest.Product;
+using PrintfulLib.Models.ApiRequest.Shipping;
+using PrintfulLib.Models.ApiRequest.StoreInformation;
+using PrintfulLib.Models.ApiRequest.Taxes;
+using PrintfulLib.Models.ApiRequest.WarehouseProducts;
+using PrintfulLib.Models.ApiRequest.WarehouseShipments;
+using PrintfulLib.Models.ApiRequest.WebhookSetup;
+using PrintfulLib.Models.ApiResponse.Catalog;
+using PrintfulLib.Models.ApiResponse.Country;
+using PrintfulLib.Models.ApiResponse.FileLibrary;
+using PrintfulLib.Models.ApiResponse.Order;
+using PrintfulLib.Models.ApiResponse.Product;
+using PrintfulLib.Models.ApiResponse.Shipping;
+using PrintfulLib.Models.ApiResponse.StoreInformation;
+using PrintfulLib.Models.ApiResponse.Taxes;
+using PrintfulLib.Models.ApiResponse.WarehouseProducts;
+using PrintfulLib.Models.ApiResponse.WarehouseShipments;
+using PrintfulLib.Models.ApiResponse.WebhookSetup;
 using PrintfulLib.Services;
 
 namespace PrintfulLib.ExternalClients
@@ -20,6 +37,7 @@ namespace PrintfulLib.ExternalClients
         private readonly FileLibraryService _fileLibraryService;
         private readonly OrderService _orderService;
         private readonly WebhookSetupService _webhookSetupService;
+        private readonly CatalogService _catalogService;
 
         public PrintfulClient(string apiKey)
         {
@@ -33,6 +51,7 @@ namespace PrintfulLib.ExternalClients
             _fileLibraryService = new FileLibraryService(apiKey);
             _orderService = new OrderService(apiKey);
             _webhookSetupService = new WebhookSetupService(apiKey);
+            _catalogService = new CatalogService(apiKey);
         }
 
         public async Task<GetRequiredTaxStatesResponse> GetRequiredTaxStates()
@@ -271,6 +290,20 @@ namespace PrintfulLib.ExternalClients
         public async Task<WebhookConfigurationResponse> DisableWebhookConfiguration()
         {
             var result = await _webhookSetupService.Disable();
+
+            return result;
+        }
+
+        public async Task<GetCategoriesResponse> GetCategories()
+        {
+            var result = await _catalogService.GetCategories();
+
+            return result;
+        }
+
+        public async Task<GetCategoryResponse> GetCategory(GetCategoryRequest request)
+        {
+            var result = await _catalogService.GetCategory(request);
 
             return result;
         }

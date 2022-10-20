@@ -3,6 +3,12 @@ using System.Linq;
 using System.Security.Permissions;
 using PrintfulLib.ExternalClients;
 using PrintfulLib.Models.ApiRequest;
+using PrintfulLib.Models.ApiRequest.FileLibrary;
+using PrintfulLib.Models.ApiRequest.Order;
+using PrintfulLib.Models.ApiRequest.Product;
+using PrintfulLib.Models.ApiRequest.Shipping;
+using PrintfulLib.Models.ApiRequest.Taxes;
+using PrintfulLib.Models.ApiRequest.WarehouseProducts;
 using PrintfulLib.Models.ChildObjects;
 
 namespace TestHarness
@@ -15,7 +21,7 @@ namespace TestHarness
         static void Main(string[] args)
         {
             // It is recommended to wrap the Client creation in a Factory class for DI purposes
-            var client = new PrintfulClient("INSERT-API-KEY");
+            var client = new PrintfulClient("faubz4qk-z5hy-ajra:4g7e-oe2jc3uk9bj1");
 
             var keepRunning = true;
 
@@ -303,6 +309,79 @@ namespace TestHarness
 
                         Console.WriteLine($"OrderId: {cancelOrderResponse.CancelledOrder.OrderId}");
                         Console.WriteLine($"Order Status: {cancelOrderResponse.CancelledOrder.OrderStatus}");
+                        break;
+                    case "14":
+                        var categories = client.GetCategories();
+
+                        var getCategoriesResponse = categories.Result;
+
+                        Console.WriteLine($"Status Code: {getCategoriesResponse.StatusCode}");
+                        foreach (var category in getCategoriesResponse.CategoriesContainer.Categories)
+                        {
+                            Console.WriteLine($"ID: {category.Id}");
+                            Console.WriteLine($"ParentId: {category.ParentId}");
+                            Console.WriteLine($"ImageUrl: {category.ImageUrl}");
+                            Console.WriteLine($"Size: {category.Size}");
+                            Console.WriteLine($"Title: {category.Title}");
+                        }
+
+                        break;
+                    case "15":
+                        var categoryResponse = client.GetCategory(new GetCategoryRequest
+                        {
+                            CategoryId = 116
+                        });
+
+                        var categoryResult = categoryResponse.Result.Category;
+
+                        Console.WriteLine($"ID: {categoryResult.Id}");
+                        Console.WriteLine($"ParentId: {categoryResult.ParentId}");
+                        Console.WriteLine($"ImageUrl: {categoryResult.ImageUrl}");
+                        Console.WriteLine($"Size: {categoryResult.Size}");
+                        Console.WriteLine($"Title: {categoryResult.Title}");
+                        break;
+                    case "16":
+                        var searchProductsWithCategoryRequest = client.GetProducts(new GetProductsRequest
+                        {
+                            CategoryId = 5,
+                            SearchTerms = "Mug"
+                        });
+                        searchProductsWithCategoryRequest.Wait();
+
+                        var searchProductsWithCategoryResult = searchProductsWithCategoryRequest.Result;
+
+                        Console.WriteLine($"Page {searchProductsWithCategoryResult.Paging.Page} of {searchProductsWithCategoryResult.Paging.TotalPages}");
+                        foreach (var product in searchProductsWithCategoryResult.Result)
+                        {
+                            Console.WriteLine($"ID: {product.Id}");
+                            Console.WriteLine($"ExternalID: {product.ExternalId}");
+                            Console.WriteLine($"Product Name: {product.Name}");
+                            Console.WriteLine($"Variants (sizes and colours): {product.Variants}");
+                            Console.WriteLine($"Synced: {product.Synced}");
+                            Console.WriteLine($"Thumbnail: {product.ThumbnailUrl}");
+                        }
+
+                        break;
+                    case "17":
+                        var searchProductsRequest = client.GetProducts(new GetProductsRequest
+                        {
+                            SearchTerms = "Mug"
+                        });
+                        searchProductsRequest.Wait();
+
+                        var searchProductResult = searchProductsRequest.Result;
+
+                        Console.WriteLine($"Page {searchProductResult.Paging.Page} of {searchProductResult.Paging.TotalPages}");
+                        foreach (var product in searchProductResult.Result)
+                        {
+                            Console.WriteLine($"ID: {product.Id}");
+                            Console.WriteLine($"ExternalID: {product.ExternalId}");
+                            Console.WriteLine($"Product Name: {product.Name}");
+                            Console.WriteLine($"Variants (sizes and colours): {product.Variants}");
+                            Console.WriteLine($"Synced: {product.Synced}");
+                            Console.WriteLine($"Thumbnail: {product.ThumbnailUrl}");
+                        }
+
                         break;
                     case "20":
                         keepRunning = false;

@@ -1,7 +1,24 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using PrintfulLib.Models.ApiRequest;
-using PrintfulLib.Models.ApiResponse;
+using PrintfulLib.Models.ApiRequest.FileLibrary;
+using PrintfulLib.Models.ApiRequest.Order;
+using PrintfulLib.Models.ApiRequest.Product;
+using PrintfulLib.Models.ApiRequest.Shipping;
+using PrintfulLib.Models.ApiRequest.StoreInformation;
+using PrintfulLib.Models.ApiRequest.Taxes;
+using PrintfulLib.Models.ApiRequest.WarehouseProducts;
+using PrintfulLib.Models.ApiRequest.WarehouseShipments;
+using PrintfulLib.Models.ApiRequest.WebhookSetup;
+using PrintfulLib.Models.ApiResponse.Country;
+using PrintfulLib.Models.ApiResponse.FileLibrary;
+using PrintfulLib.Models.ApiResponse.Order;
+using PrintfulLib.Models.ApiResponse.Product;
+using PrintfulLib.Models.ApiResponse.Shipping;
+using PrintfulLib.Models.ApiResponse.StoreInformation;
+using PrintfulLib.Models.ApiResponse.Taxes;
+using PrintfulLib.Models.ApiResponse.WarehouseProducts;
+using PrintfulLib.Models.ApiResponse.WarehouseShipments;
+using PrintfulLib.Models.ApiResponse.WebhookSetup;
 
 namespace PrintfulLib.Interfaces.ExternalClients
 {

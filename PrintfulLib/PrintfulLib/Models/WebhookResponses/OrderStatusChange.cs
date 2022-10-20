@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PrintfulLib.Models.ChildObjects;
 
 namespace PrintfulLib.Models.WebhookResponses
