@@ -343,7 +343,7 @@ namespace TestHarness
                     case "16":
                         var searchProductsWithCategoryRequest = client.GetProducts(new GetProductsRequest
                         {
-                            CategoryId = 5,
+                            CategoryIds = new int[] { 5 },
                             SearchTerms = "Mug"
                         });
                         searchProductsWithCategoryRequest.Wait();
