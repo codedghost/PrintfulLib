@@ -10,7 +10,7 @@ namespace PrintfulLib.Models.ChildObjects
         [JsonProperty("parent_id")]
         public int ParentId { get; set; }
 
-        [JsonProperty("iamge_url")]
+        [JsonProperty("image_url")]
         public string ImageUrl { get; set; }
 
         [JsonProperty("size")]
