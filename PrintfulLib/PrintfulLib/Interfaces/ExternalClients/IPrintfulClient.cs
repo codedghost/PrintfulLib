@@ -9,6 +9,7 @@ using PrintfulLib.Models.ApiRequest.Taxes;
 using PrintfulLib.Models.ApiRequest.WarehouseProducts;
 using PrintfulLib.Models.ApiRequest.WarehouseShipments;
 using PrintfulLib.Models.ApiRequest.WebhookSetup;
+using PrintfulLib.Models.ApiResponse.Catalog;
 using PrintfulLib.Models.ApiResponse.Country;
 using PrintfulLib.Models.ApiResponse.FileLibrary;
 using PrintfulLib.Models.ApiResponse.Order;
@@ -65,5 +66,7 @@ namespace PrintfulLib.Interfaces.ExternalClients
         Task<WebhookConfigurationResponse> GetWebhookConfiguration();
         Task<WebhookConfigurationResponse> SetWebhookConfiguration(SetUpWebhookConfigurationRequest request);
         Task<WebhookConfigurationResponse> DisableWebhookConfiguration();
+        Task<GetCategoriesResponse> GetCategories();
+        Task<GetCategoryResponse> GetCategory(GetCategoryRequest request);
     }
 }
