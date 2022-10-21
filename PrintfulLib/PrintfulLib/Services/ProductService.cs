@@ -29,7 +29,7 @@ namespace PrintfulLib.Services
                 : $"&search={request.SearchTerms}";
 
             var apiResponse = await _client.GetAsync<GetSyncProductsResponse>(
-                $"store/products?category_id={request.CategoryId}&limit={request.Limit}&offset={request.Offset}{statusString}{searchString}");
+                $"store/products?category_id={string.Join(",",request.CategoryIds)}&limit={request.Limit}&offset={request.Offset}{statusString}{searchString}");
 
             return apiResponse;
         }

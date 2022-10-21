@@ -2,7 +2,7 @@
 {
     public class GetProductsRequest
     {
-        public int CategoryId { get; set; }
+        public int[] CategoryIds { get; set; }
         public string FilterStatus { get; set; }
         public string SearchTerms { get; set; }
         public int Offset { get; set; }
