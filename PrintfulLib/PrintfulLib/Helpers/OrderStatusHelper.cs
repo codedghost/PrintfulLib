@@ -25,6 +25,8 @@ namespace PrintfulLib.Helpers
                     return "partial";
                 case OrderStatus.Fulfilled:
                     return "fulfilled";
+                case OrderStatus.Archived:
+                    return "archived";
                 default:
                     throw new InvalidEnumArgumentException("Invalid value for OrderStatus");
             }
@@ -50,6 +52,8 @@ namespace PrintfulLib.Helpers
                     return OrderStatus.Partial;
                 case "fulfilled":
                     return OrderStatus.Fulfilled;
+                case "archived":
+                    return OrderStatus.Archived;
                 default:
                     throw new InvalidEnumArgumentException("Invalid value for OrderStatus");
             }

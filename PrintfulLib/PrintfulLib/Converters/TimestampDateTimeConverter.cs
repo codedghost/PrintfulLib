@@ -18,7 +18,7 @@ namespace PrintfulLib.Converters
         {
             if (reader.Value == null)
             {
-                throw new ArgumentException("No value given for DateTime field");
+                return new DateTime();
             }
 
             return _epochDateTime.AddSeconds((long) reader.Value);

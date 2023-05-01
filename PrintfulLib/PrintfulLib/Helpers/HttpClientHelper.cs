@@ -15,9 +15,9 @@ namespace PrintfulLib.Helpers
                 BaseAddress = new Uri("https://api.printful.com/"),
                 DefaultRequestHeaders =
                 {
-                    Authorization = new AuthenticationHeaderValue("Basic",
-                        Convert.ToBase64String(Encoding.UTF8.GetBytes(apiKey)))
-                }
+                    Authorization = new AuthenticationHeaderValue("Bearer",
+                        apiKey)
+                },
             };
         }
 

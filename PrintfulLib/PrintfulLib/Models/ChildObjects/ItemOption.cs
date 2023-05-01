@@ -8,6 +8,6 @@ namespace PrintfulLib.Models.ChildObjects
         public string OptionId { get; set; }
 
         [JsonProperty("value")]
-        public string OptionValue { get; set; }
+        public object OptionValue { get; set; }
     }
 }

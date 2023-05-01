@@ -21,7 +21,7 @@ namespace TestHarness
         static void Main(string[] args)
         {
             // It is recommended to wrap the Client creation in a Factory class for DI purposes
-            var client = new PrintfulClient("faubz4qk-z5hy-ajra:4g7e-oe2jc3uk9bj1");
+            var client = new PrintfulClient("");
 
             var keepRunning = true;
 

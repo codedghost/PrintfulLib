@@ -10,7 +10,8 @@
         InProcess = 5,
         OnHold = 6,
         Partial = 7,
-        Fulfilled = 8
+        Fulfilled = 8,
+        Archived = 9
     }
 
     public static class OrderStatusExtension
@@ -35,6 +36,8 @@
                     return "Partial";
                 case OrderStatus.Fulfilled:
                     return "Fulfilled";
+                case OrderStatus.Archived:
+                    return "Archived";
                 default:
                     return "NO STATUS";
             }
